@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Đội ngũ - Xây Nhà Trọn Gói FULLBD</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <link th:href="@{/assets/img/favicon.png}" rel="icon" />
+    <link
+      th:href="@{/assets/img/apple-touch-icon.png}"
+      rel="apple-touch-icon"
+    />
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+      rel="stylesheet"
+    />
+    <link th:href="@{/assets/vendor/aos/aos.css}" rel="stylesheet" />
+    <link
+      th:href="@{/assets/vendor/glightbox/css/glightbox.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}"
+      rel="stylesheet"
+    />
+
+    <link th:href="@{/assets/css/main.css}" rel="stylesheet" />
+  </head>
+
+  <body class="team-page">
+    <header id="header" class="header d-flex align-items-center fixed-top">
+      <div
+        class="container-fluid container-xl position-relative d-flex align-items-center"
+      >
+        <a th:href="@{/}" class="logo d-flex align-items-center me-auto">
+          <h1 class="sitename">Xây Dựng FULLBD</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a th:href="@{/}">Trang chủ</a></li>
+            <li><a th:href="@{/about}">Giới thiệu</a></li>
+            <li><a th:href="@{/services}">Dịch vụ</a></li>
+            <li><a th:href="@{/projects}">Dự án</a></li>
+            <li><a th:href="@{/team}" class="active">Đội ngũ</a></li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>Trang khác</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i
+              ></a>
+              <ul>
+                <li><a th:href="@{/service-details}">Chi tiết Dịch vụ</a></li>
+                <li><a th:href="@{/quote}">Báo giá</a></li>
+                <li>
+                  <a th:href="@{/ai-design}">AI Dự Toán & Thiết Kế Nhanh</a>
+                </li>
+              </ul>
+            </li>
+
+            <li><a th:href="@{/contact}">Liên hệ</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <a class="btn-getstarted d-none d-sm-block" th:href="@{/quote}"
+          >Yêu cầu Báo giá</a
+        >
+      </div>
+    </header>
+
+    <main class="main">
+      <div
+        class="page-title dark-background"
+        data-aos="fade"
+        th:style="'background-image: url(' + @{/assets/img/construction/showcase-2.webp} + ')'"
+      >
+        <div class="container position-relative">
+          <h1>Đội ngũ của Chúng tôi</h1>
+          <p>
+            Tập hợp những chuyên gia giàu kinh nghiệm, tận tâm và chuyên nghiệp,
+            luôn sẵn sàng hiện thực hóa mọi ý tưởng xây dựng của bạn với chất
+            lượng cao nhất.
+          </p>
+          <nav class="breadcrumbs">
+            <ol>
+              <li><a th:href="@{/}">Trang chủ</a></li>
+              <li class="current">Đội ngũ</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <section id="team" class="team section">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row gy-5">
+            <div class="col-lg-4 col-md-6">
+              <div class="team-member" data-aos="fade-up" data-aos-delay="200">
+                <div class="member-img">
+                  <img
+                    th:src="@{/assets/img/construction/team-1.webp}"
+                    class="img-fluid"
+                    alt=""
+                  />
+                </div>
+                <div class="member-info">
+                  <h4>Marcus Thompson</h4>
+                  <span>Quản lý Dự án</span>
+                  <p>
+                    Hơn 15 năm kinh nghiệm quản lý các dự án quy mô lớn, đảm bảo
+                    tiến độ thi công và kiểm soát ngân sách hiệu quả.
+                  </p>
+                  <div class="social">
+                    <a href=""><i class="bi bi-twitter-x"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href=""><i class="bi bi-envelope"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="team-member" data-aos="fade-up" data-aos-delay="300">
+                <div class="member-img">
+                  <img
+                    th:src="@{/assets/img/construction/team-3.webp}"
+                    class="img-fluid"
+                    alt=""
+                  />
+                </div>
+                <div class="member-info">
+                  <h4>Ben Rodriguez</h4>
+                  <span>Giám sát Công trình</span>
+                  <p>
+                    Chuyên gia giám sát hiện trường, đảm bảo mọi quy trình thi
+                    công đều tuân thủ nghiêm ngặt các tiêu chuẩn kỹ thuật.
+                  </p>
+                  <div class="social">
+                    <a href=""><i class="bi bi-twitter-x"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="team-member" data-aos="fade-up" data-aos-delay="400">
+                <div class="member-img">
+                  <img
+                    th:src="@{/assets/img/construction/team-5.webp}"
+                    class="img-fluid"
+                    alt=""
+                  />
+                </div>
+                <div class="member-info">
+                  <h4>David Chen</h4>
+                  <span>Điều phối viên An toàn</span>
+                  <p>
+                    Cam kết xây dựng môi trường làm việc không tai nạn, luôn đặt
+                    sự an toàn của con người lên hàng đầu trong mọi công trình.
+                  </p>
+                  <div class="social">
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href=""><i class="bi bi-envelope"></i></a>
+                    <a href=""><i class="bi bi-phone"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="team-member" data-aos="fade-up" data-aos-delay="200">
+                <div class="member-img">
+                  <img
+                    th:src="@{/assets/img/construction/team-7.webp}"
+                    class="img-fluid"
+                    alt=""
+                  />
+                </div>
+                <div class="member-info">
+                  <h4>Anton Walsh</h4>
+                  <span>Thanh tra Kiểm soát Chất lượng</span>
+                  <p>
+                    Tỉ mỉ trong từng chi tiết, đảm bảo mọi hạng mục công trình
+                    khi bàn giao đều đạt tiêu chuẩn hoàn hảo nhất.
+                  </p>
+                  <div class="social">
+                    <a href=""><i class="bi bi-twitter-x"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="team-member" data-aos="fade-up" data-aos-delay="300">
+                <div class="member-img">
+                  <img
+                    th:src="@{/assets/img/construction/team-9.webp}"
+                    class="img-fluid"
+                    alt=""
+                  />
+                </div>
+                <div class="member-info">
+                  <h4>Michaela Torres</h4>
+                  <span>Đội trưởng Thi công</span>
+                  <p>
+                    Lãnh đạo đội ngũ công nhân với tinh thần trách nhiệm cao,
+                    giải quyết hiệu quả mọi vấn đề phát sinh tại hiện trường.
+                  </p>
+                  <div class="social">
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href=""><i class="bi bi-envelope"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="team-member" data-aos="fade-up" data-aos-delay="400">
+                <div class="member-img">
+                  <img
+                    th:src="@{/assets/img/construction/team-2.webp}"
+                    class="img-fluid"
+                    alt=""
+                  />
+                </div>
+                <div class="member-info">
+                  <h4>Arnold Foster</h4>
+                  <span>Kiến trúc sư</span>
+                  <p>
+                    Người thổi hồn vào các công trình với những thiết kế sáng
+                    tạo, kết hợp hài hòa giữa thẩm mỹ tinh tế và công năng sử
+                    dụng.
+                  </p>
+                  <div class="social">
+                    <a href=""><i class="bi bi-twitter-x"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href=""><i class="bi bi-envelope"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="footer" class="footer dark-background">
+      <div class="container">
+        <div class="row gy-5">
+          <div class="col-lg-4">
+            <div class="footer-brand">
+              <a th:href="@{/}" class="logo d-flex align-items-center mb-3">
+                <span class="sitename">iConstruction</span>
+              </a>
+              <p class="tagline">
+                Đổi mới cảnh quan kỹ thuật số với các giải pháp thanh lịch và
+                thiết kế vượt thời gian.
+              </p>
+
+              <div class="social-links mt-4">
+                <a href="#" aria-label="Facebook"
+                  ><i class="bi bi-facebook"></i
+                ></a>
+                <a href="#" aria-label="Instagram"
+                  ><i class="bi bi-instagram"></i
+                ></a>
+                <a href="#" aria-label="LinkedIn"
+                  ><i class="bi bi-linkedin"></i
+                ></a>
+                <a href="#" aria-label="Twitter"
+                  ><i class="bi bi-twitter-x"></i
+                ></a>
+                <a href="#" aria-label="Dribbble"
+                  ><i class="bi bi-dribbble"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="footer-links-grid">
+              <div class="row">
+                <div class="col-6 col-md-4">
+                  <h5>Công ty</h5>
+                  <ul class="list-unstyled">
+                    <li><a href="#">Về Chúng tôi</a></li>
+                    <li><a href="#">Đội ngũ</a></li>
+                    <li><a href="#">Tuyển dụng</a></li>
+                    <li><a href="#">Tin tức</a></li>
+                  </ul>
+                </div>
+                <div class="col-6 col-md-4">
+                  <h5>Dịch vụ</h5>
+                  <ul class="list-unstyled">
+                    <li><a href="#">Xây dựng Dân dụng</a></li>
+                    <li><a href="#">Thiết kế Kiến trúc</a></li>
+                    <li><a href="#">Quản lý Dự án</a></li>
+                    <li><a href="#">Trang trí Nội thất</a></li>
+                  </ul>
+                </div>
+                <div class="col-6 col-md-4">
+                  <h5>Hỗ trợ</h5>
+                  <ul class="list-unstyled">
+                    <li><a href="#">Trung tâm Trợ giúp</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="#">Chính sách Riêng tư</a></li>
+                    <li><a href="#">Điều khoản Dịch vụ</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2">
+            <div class="footer-cta">
+              <h5>Kết nối ngay</h5>
+              <a th:href="@{/contact}" class="btn btn-outline">Liên hệ</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="footer-bottom-content">
+                <p class="mb-0">
+                  © <span class="sitename">Myebsite</span>. Bảo lưu mọi quyền.
+                </p>
+                <div class="credits">
+                  Thiết kế bởi
+                  <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <div id="preloader"></div>
+
+    <script
+      th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"
+    ></script>
+    <script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+    <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+    <script
+      th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"
+    ></script>
+    <script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+    <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+
+    <script th:src="@{/assets/js/main.js}"></script>
+  </body>
+</html>

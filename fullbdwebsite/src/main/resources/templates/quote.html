@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Báo giá - Xây Nhà Trọn Gói FULLBD</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <link th:href="@{/assets/img/favicon.png}" rel="icon" />
+    <link
+      th:href="@{/assets/img/apple-touch-icon.png}"
+      rel="apple-touch-icon"
+    />
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+      rel="stylesheet"
+    />
+    <link th:href="@{/assets/vendor/aos/aos.css}" rel="stylesheet" />
+    <link
+      th:href="@{/assets/vendor/glightbox/css/glightbox.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}"
+      rel="stylesheet"
+    />
+
+    <link th:href="@{/assets/css/main.css}" rel="stylesheet" />
+
+    <style>
+      .quote-box {
+        background: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+      }
+      .form-label {
+        font-weight: 600;
+        color: var(--heading-color);
+        margin-bottom: 8px;
+      }
+      .form-control,
+      .form-select {
+        padding: 12px 15px;
+        border-radius: 5px;
+        border: 1px solid #e0e0e0;
+        transition: all 0.3s;
+      }
+      .form-control:focus,
+      .form-select:focus {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 0.2rem rgba(233, 99, 8, 0.15);
+      }
+      .submit-btn-custom {
+        background: var(--accent-color);
+        color: white;
+        padding: 14px 40px;
+        border-radius: 5px;
+        border: none;
+        font-weight: 600;
+        transition: 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .submit-btn-custom:hover {
+        background: #d15600; /* Màu đậm hơn của accent */
+        color: white;
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+
+  <body class="quote-page">
+    <header id="header" class="header d-flex align-items-center fixed-top">
+      <div
+        class="container-fluid container-xl position-relative d-flex align-items-center"
+      >
+        <a th:href="@{/}" class="logo d-flex align-items-center me-auto">
+          <h1 class="sitename">Xây Dựng FULLBD</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a th:href="@{/}">Trang chủ</a></li>
+            <li><a th:href="@{/about}">Giới thiệu</a></li>
+            <li><a th:href="@{/services}">Dịch vụ</a></li>
+            <li><a th:href="@{/projects}">Dự án</a></li>
+            <li><a th:href="@{/team}">Đội ngũ</a></li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>Trang khác</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i
+              ></a>
+              <ul>
+                <li><a th:href="@{/service-details}">Chi tiết Dịch vụ</a></li>
+                <li><a th:href="@{/quote}" class="active">Báo giá</a></li>
+                <li>
+                  <a th:href="@{/ai-design}">AI Dự Toán & Thiết Kế Nhanh</a>
+                </li>
+              </ul>
+            </li>
+            <li><a th:href="@{/contact}">Liên hệ</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+        <a class="btn-getstarted d-none d-sm-block" th:href="@{/quote}"
+          >Yêu cầu Báo giá</a
+        >
+      </div>
+    </header>
+
+    <main class="main">
+      <div
+        class="page-title dark-background"
+        data-aos="fade"
+        th:style="'background-image: url(' + @{/assets/img/construction/showcase-2.webp} + ')'"
+      >
+        <div class="container position-relative">
+          <h1>Yêu cầu Báo giá</h1>
+          <nav class="breadcrumbs">
+            <ol>
+              <li><a th:href="@{/}">Trang chủ</a></li>
+              <li class="current">Báo giá</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <section id="quote" class="quote section">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row justify-content-center">
+            <div class="col-lg-10">
+              <div
+                th:if="${message}"
+                class="alert alert-success alert-dismissible fade show"
+                role="alert"
+              >
+                <i class="bi bi-check-circle me-1"></i>
+                <span th:text="${message}"></span>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div
+                th:if="${error}"
+                class="alert alert-danger alert-dismissible fade show"
+                role="alert"
+              >
+                <i class="bi bi-exclamation-octagon me-1"></i>
+                <span th:text="${error}"></span>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                ></button>
+              </div>
+
+              <div class="quote-box">
+                <div class="text-center mb-5">
+                  <h3>Nhận Báo Giá Chi Tiết</h3>
+                  <p class="text-muted">
+                    Hãy điền thông tin dự án của bạn bên dưới, chúng tôi sẽ phân
+                    tích và gửi báo giá sơ bộ trong vòng 24h.
+                  </p>
+                </div>
+
+                <form
+                  th:action="@{/quote/submit}"
+                  th:object="${quoteRequest}"
+                  method="post"
+                >
+                  <div class="row gy-4">
+                    <div class="col-md-6">
+                      <label for="fullname" class="form-label"
+                        >Họ và Tên <span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="text"
+                        th:field="*{name}"
+                        class="form-control"
+                        id="fullname"
+                        placeholder="Nguyễn Văn A"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="email" class="form-label"
+                        >Email <span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="email"
+                        th:field="*{email}"
+                        class="form-control"
+                        id="email"
+                        placeholder="email@example.com"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="phone" class="form-label"
+                        >Số Điện Thoại <span class="text-danger">*</span></label
+                      >
+                      <input
+                        type="tel"
+                        th:field="*{phone}"
+                        class="form-control"
+                        id="phone"
+                        placeholder="09x xxx xxxx"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="project-type" class="form-label"
+                        >Loại Dự Án <span class="text-danger">*</span></label
+                      >
+
+                      <select
+                        th:field="*{projectType}"
+                        class="form-select"
+                        id="project-type"
+                        required
+                      >
+                        <option value="">-- Chọn loại dự án --</option>
+
+                        <th:block
+                          th:if="${categories != null and !categories.isEmpty()}"
+                        >
+                          <option
+                            th:each="cat : ${categories}"
+                            th:value="${cat.name}"
+                            th:text="${cat.name}"
+                          ></option>
+                        </th:block>
+
+                        <th:block
+                          th:if="${categories == null or categories.isEmpty()}"
+                        >
+                          <option value="Xây nhà trọn gói">
+                            Xây nhà trọn gói
+                          </option>
+                          <option value="Thiết kế nội thất">
+                            Thiết kế nội thất
+                          </option>
+                          <option value="Cải tạo sửa chữa">
+                            Cải tạo sửa chữa
+                          </option>
+                          <option value="Xây dựng thương mại">
+                            Xây dựng thương mại
+                          </option>
+                        </th:block>
+                      </select>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="timeline" class="form-label"
+                        >Thời Gian Bắt Đầu Dự Kiến</label
+                      >
+                      <select
+                        th:field="*{timeline}"
+                        class="form-select"
+                        id="timeline"
+                        required
+                      >
+                        <option value="">Khi nào bắt đầu?</option>
+                        <option value="Ngay lập tức">Bắt đầu ngay</option>
+                        <option value="Trong 2-4 tuần">
+                          Trong 2-4 tuần tới
+                        </option>
+                        <option value="1-3 tháng tới">1-3 tháng tới</option>
+                        <option value="Sau 6 tháng">Sau 6 tháng</option>
+                        <option value="Linh hoạt">Linh hoạt</option>
+                      </select>
+                    </div>
+
+                    <div class="col-md-6">
+                      <label for="budget" class="form-label"
+                        >Ngân Sách Dự Kiến</label
+                      >
+                      <input
+                        type="text"
+                        th:field="*{budget}"
+                        class="form-control"
+                        id="budget"
+                        placeholder="VNĐ (Không bắt buộc)"
+                      />
+                    </div>
+
+                    <div class="col-12">
+                      <label for="description" class="form-label"
+                        >Mô Tả Chi Tiết</label
+                      >
+                      <textarea
+                        th:field="*{description}"
+                        class="form-control"
+                        id="description"
+                        rows="5"
+                        placeholder="Hãy mô tả về diện tích đất, quy mô xây dựng (số tầng, số phòng), phong cách thiết kế mong muốn..."
+                        required
+                      ></textarea>
+                    </div>
+
+                    <div class="col-12 text-center mt-4">
+                      <button type="submit" class="submit-btn-custom">
+                        Gửi Yêu Cầu Ngay <i class="bi bi-arrow-right"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="footer" class="footer dark-background">
+      <div class="container">
+        <div class="row gy-5">
+          <div class="col-lg-4">
+            <div class="footer-brand">
+              <a th:href="@{/}" class="logo d-flex align-items-center mb-3">
+                <span class="sitename">iConstruction</span>
+              </a>
+              <p class="tagline">
+                Đổi mới cảnh quan kỹ thuật số với các giải pháp thanh lịch và
+                thiết kế vượt thời gian.
+              </p>
+              <div class="social-links mt-4">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="footer-links-grid">
+              <div class="row">
+                <div class="col-6 col-md-4">
+                  <h5>Công ty</h5>
+                  <ul class="list-unstyled">
+                    <li><a href="#">Về Chúng tôi</a></li>
+                    <li><a href="#">Đội ngũ</a></li>
+                  </ul>
+                </div>
+                <div class="col-6 col-md-4">
+                  <h5>Dịch vụ</h5>
+                  <ul class="list-unstyled">
+                    <li><a href="#">Xây dựng Dân dụng</a></li>
+                    <li><a href="#">Thiết kế Kiến trúc</a></li>
+                  </ul>
+                </div>
+                <div class="col-6 col-md-4">
+                  <h5>Hỗ trợ</h5>
+                  <ul class="list-unstyled">
+                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="#">Chính sách</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="footer-cta">
+              <h5>Kết nối ngay</h5>
+              <a th:href="@{/contact}" class="btn btn-outline">Liên hệ</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 text-center">
+              <div class="footer-bottom-content">
+                <p class="mb-0">
+                  © <span class="sitename">FullBD</span>. All rights reserved.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+    <div id="preloader"></div>
+
+    <script
+      th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"
+    ></script>
+    <script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+    <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+    <script
+      th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"
+    ></script>
+    <script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+    <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+    <script th:src="@{/assets/js/main.js}"></script>
+  </body>
+</html>

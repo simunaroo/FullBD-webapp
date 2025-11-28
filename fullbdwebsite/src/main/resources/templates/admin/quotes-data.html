@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Quản lý Báo giá - FullBD Admin</title>
+
+    <link th:href="@{/admin-assets/img/favicon.png}" rel="icon" />
+    <link
+      th:href="@{/admin-assets/img/apple-touch-icon.png}"
+      rel="apple-touch-icon"
+    />
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/boxicons/css/boxicons.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/simple-datatables/style.css}"
+      rel="stylesheet"
+    />
+    <link th:href="@{/admin-assets/css/style.css}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header id="header" class="header fixed-top d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        <a th:href="@{/admin}" class="logo d-flex align-items-center">
+          <img th:src="@{/admin-assets/img/logo.png}" alt="" />
+          <span class="d-none d-lg-block">FullBD Admin</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+      </div>
+      <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+          <li class="nav-item dropdown pe-3">
+            <a
+              class="nav-link nav-profile d-flex align-items-center pe-0"
+              href="#"
+              data-bs-toggle="dropdown"
+            >
+              <img
+                th:src="@{/admin-assets/img/profile-img.jpg}"
+                alt="Profile"
+                class="rounded-circle"
+              />
+              <span
+                class="d-none d-md-block dropdown-toggle ps-2"
+                th:text="${currentUser != null ? currentUser.fullName : 'Admin'}"
+                >Admin</span
+              >
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
+            >
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  th:href="@{/logout}"
+                  ><i class="bi bi-box-arrow-right"></i
+                  ><span>Đăng xuất</span></a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <aside id="sidebar" class="sidebar">
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin}">
+            <i class="bi bi-grid"></i>
+            <span>Bảng điều khiển</span>
+          </a>
+        </li>
+        <li class="nav-heading">Quản lý</li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/categories}">
+            <i class="bi bi-menu-button-wide"></i>
+            <span>Danh mục dự án</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/tables-data}">
+            <i class="bi bi-layout-text-window-reverse"></i>
+            <span>Tất cả dự án</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/admin/quotes-data}">
+            <i class="bi bi-menu-button-wide"></i>
+            <span>Yêu cầu báo giá</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            data-bs-target="#charts-nav"
+            data-bs-toggle="collapse"
+            href="#"
+          >
+            <i class="bi bi-bar-chart"></i><span>Thống kê</span
+            ><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul
+            id="charts-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a th:href="@{/admin/charts-chartjs}">
+                <i class="bi bi-circle"></i><span>Xem biểu đồ</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-heading">Trang khác</li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/users-profile}">
+            <i class="bi bi-person"></i>
+            <span>Thông tin cá nhân</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/pages-login}">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Đăng nhập</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/}">
+            <i class="bi bi-house-door"></i>
+            <span>Về Trang Chủ</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Danh sách Yêu cầu Báo giá</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a th:href="@{/admin}">Trang chủ</a>
+            </li>
+            <li class="breadcrumb-item active">Báo giá</li>
+          </ol>
+        </nav>
+      </div>
+
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+            <div
+              th:if="${message}"
+              class="alert alert-success alert-dismissible fade show"
+              role="alert"
+            >
+              <i class="bi bi-check-circle me-1"></i>
+              <span th:text="${message}"></span>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Tất cả yêu cầu</h5>
+
+                <table class="table datatable table-striped">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Khách hàng</th>
+                      <th>Loại dự án</th>
+                      <th>Ngân sách</th>
+                      <th>Thời gian</th>
+                      <th>Ngày gửi</th>
+                      <th>Hành động</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="quote : ${quotes}">
+                      <td th:text="${quote.id}">1</td>
+                      <td>
+                        <span class="fw-bold" th:text="${quote.name}"
+                          >Tên Khách</span
+                        ><br />
+                        <small class="text-muted" th:text="${quote.phone}"
+                          >SDT</small
+                        ><br />
+                        <small class="text-muted" th:text="${quote.email}"
+                          >Email</small
+                        >
+                      </td>
+                      <td th:text="${quote.projectType}">Nhà phố</td>
+                      <td th:text="${quote.budget}">1 tỷ</td>
+                      <td th:text="${quote.timeline}">3 tháng</td>
+
+                      <td
+                        th:text="${#temporals.format(quote.createdAt, 'dd-MM-yyyy HH:mm')}"
+                      >
+                        01-01-2024
+                      </td>
+
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn-primary btn-sm"
+                          data-bs-toggle="modal"
+                          th:data-bs-target="'#quoteModal' + ${quote.id}"
+                        >
+                          <i class="bi bi-eye"></i>
+                        </button>
+
+                        <a
+                          th:href="@{/admin/quotes/delete/{id}(id=${quote.id})}"
+                          class="btn btn-danger btn-sm"
+                          onclick="return confirm('Bạn có chắc muốn xóa yêu cầu này?');"
+                        >
+                          <i class="bi bi-trash"></i>
+                        </a>
+
+                        <div
+                          class="modal fade"
+                          th:id="'quoteModal' + ${quote.id}"
+                          tabindex="-1"
+                        >
+                          <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">
+                                  Chi tiết yêu cầu #<span
+                                    th:text="${quote.id}"
+                                  ></span>
+                                </h5>
+                                <button
+                                  type="button"
+                                  class="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              <div class="modal-body">
+                                <p>
+                                  <strong>Họ tên:</strong>
+                                  <span th:text="${quote.name}"></span>
+                                </p>
+                                <p>
+                                  <strong>Email:</strong>
+                                  <span th:text="${quote.email}"></span>
+                                </p>
+                                <p>
+                                  <strong>SĐT:</strong>
+                                  <span th:text="${quote.phone}"></span>
+                                </p>
+                                <hr />
+                                <p>
+                                  <strong>Loại dự án:</strong>
+                                  <span th:text="${quote.projectType}"></span>
+                                </p>
+                                <p>
+                                  <strong>Ngân sách:</strong>
+                                  <span th:text="${quote.budget}"></span>
+                                </p>
+                                <p>
+                                  <strong>Thời gian:</strong>
+                                  <span th:text="${quote.timeline}"></span>
+                                </p>
+                                <p><strong>Mô tả chi tiết:</strong></p>
+                                <div
+                                  class="p-3 bg-light rounded"
+                                  th:text="${quote.description}"
+                                >
+                                  Nội dung mô tả...
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button
+                                  type="button"
+                                  class="btn btn-secondary"
+                                  data-bs-dismiss="modal"
+                                >
+                                  Đóng
+                                </button>
+                                <a href="#" class="btn btn-success"
+                                  ><i class="bi bi-telephone"></i> Gọi điện</a
+                                >
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <script
+      th:src="@{/admin-assets/vendor/apexcharts/apexcharts.min.js}"
+    ></script>
+    <script
+      th:src="@{/admin-assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"
+    ></script>
+    <script
+      th:src="@{/admin-assets/vendor/simple-datatables/simple-datatables.js}"
+    ></script>
+    <script th:src="@{/admin-assets/vendor/tinymce/tinymce.min.js}"></script>
+
+    <script th:src="@{/admin-assets/js/main.js}"></script>
+  </body>
+</html>

@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Thành phần Biểu mẫu - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <link th:href="@{/admin-assets/img/favicon.png}" rel="icon" />
+    <link
+      th:href="@{/admin-assets/img/apple-touch-icon.png}"
+      rel="apple-touch-icon"
+    />
+
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <link
+      th:href="@{/admin-assets/vendor/bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/boxicons/css/boxicons.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/quill/quill.snow.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/quill/quill.bubble.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/remixicon/remixicon.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/simple-datatables/style.css}"
+      rel="stylesheet"
+    />
+
+    <link th:href="@{/admin-assets/css/style.css}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header id="header" class="header fixed-top d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        <a th:href="@{/admin}" class="logo d-flex align-items-center">
+          <img th:src="@{/admin-assets/img/logo.png}" alt="" />
+          <span class="d-none d-lg-block">FullBD Admin</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+      </div>
+
+      <div class="search-bar">
+        <form
+          class="search-form d-flex align-items-center"
+          method="POST"
+          action="#"
+        >
+          <input
+            type="text"
+            name="query"
+            placeholder="Tìm kiếm"
+            title="Nhập từ khóa tìm kiếm"
+          />
+          <button type="submit" title="Search">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+      </div>
+
+      <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+          <li class="nav-item d-block d-lg-none">
+            <a class="nav-link nav-icon search-bar-toggle" href="#">
+              <i class="bi bi-search"></i>
+            </a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-bell"></i>
+              <span class="badge bg-primary badge-number">4</span>
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
+            >
+              <li class="dropdown-header">
+                Bạn có 4 thông báo mới
+                <a href="#"
+                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
+                    >Xem tất cả</span
+                  ></a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li class="notification-item">
+                <i class="bi bi-exclamation-circle text-warning"></i>
+                <div>
+                  <h4>Cảnh báo hệ thống</h4>
+                  <p>Vui lòng kiểm tra lại cấu hình...</p>
+                  <p>30 phút trước</p>
+                </div>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li class="dropdown-footer">
+                <a href="#">Xem tất cả thông báo</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown pe-3">
+            <a
+              class="nav-link nav-profile d-flex align-items-center pe-0"
+              href="#"
+              data-bs-toggle="dropdown"
+            >
+              <img
+                th:src="@{/admin-assets/img/profile-img.jpg}"
+                alt="Profile"
+                class="rounded-circle"
+              />
+              <span
+                class="d-none d-md-block dropdown-toggle ps-2"
+                th:text="${currentUser != null ? currentUser.fullName : 'Khách'}"
+                >Khách</span
+              >
+            </a>
+
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
+            >
+              <li class="dropdown-header">
+                <h6
+                  th:text="${currentUser != null ? currentUser.fullName : 'Khách'}"
+                >
+                  Khách
+                </h6>
+                <span
+                  th:text="${currentUser != null ? currentUser.role : 'Người dùng'}"
+                  >Web Designer</span
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  th:href="@{/admin/users-profile}"
+                >
+                  <i class="bi bi-person"></i>
+                  <span>Hồ sơ cá nhân</span>
+                </a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  th:href="@{/logout}"
+                >
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Đăng xuất</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <aside id="sidebar" class="sidebar">
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin}">
+            <i class="bi bi-grid"></i>
+            <span>Bảng điều khiển</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            data-bs-target="#forms-nav"
+            data-bs-toggle="collapse"
+            href="#"
+          >
+            <i class="bi bi-journal-text"></i><span>Biểu mẫu</span
+            ><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul
+            id="forms-nav"
+            class="nav-content collapse show"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a th:href="@{/admin/forms-elements}" class="active">
+                <i class="bi bi-circle"></i><span>Thành phần biểu mẫu</span>
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/admin/forms-layouts}">
+                <i class="bi bi-circle"></i><span>Bố cục biểu mẫu</span>
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/admin/forms-editors}">
+                <i class="bi bi-circle"></i><span>Trình soạn thảo</span>
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/admin/forms-validation}">
+                <i class="bi bi-circle"></i><span>Xác thực dữ liệu</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            data-bs-target="#tables-nav"
+            data-bs-toggle="collapse"
+            href="#"
+          >
+            <i class="bi bi-layout-text-window-reverse"></i
+            ><span>Bảng dữ liệu</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul
+            id="tables-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a th:href="@{/admin/tables-data}">
+                <i class="bi bi-circle"></i><span>Danh sách dự án</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-heading">Trang khác</li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/users-profile}">
+            <i class="bi bi-person"></i>
+            <span>Hồ sơ cá nhân</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/pages-contact}">
+            <i class="bi bi-envelope"></i>
+            <span>Liên hệ</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/pages-register}">
+            <i class="bi bi-card-list"></i>
+            <span>Đăng ký</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/pages-login}">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Đăng nhập</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Thành phần Biểu mẫu</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a th:href="@{/admin}">Trang chủ</a>
+            </li>
+            <li class="breadcrumb-item">Biểu mẫu</li>
+            <li class="breadcrumb-item active">Thành phần</li>
+          </ol>
+        </nav>
+      </div>
+
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Biểu mẫu Cơ bản</h5>
+
+                <form>
+                  <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label"
+                      >Văn bản</label
+                    >
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputEmail" class="col-sm-2 col-form-label"
+                      >Email</label
+                    >
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputPassword" class="col-sm-2 col-form-label"
+                      >Mật khẩu</label
+                    >
+                    <div class="col-sm-10">
+                      <input type="password" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputNumber" class="col-sm-2 col-form-label"
+                      >Số</label
+                    >
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputNumber" class="col-sm-2 col-form-label"
+                      >Tải file lên</label
+                    >
+                    <div class="col-sm-10">
+                      <input class="form-control" type="file" id="formFile" />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputDate" class="col-sm-2 col-form-label"
+                      >Ngày tháng</label
+                    >
+                    <div class="col-sm-10">
+                      <input type="date" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputTime" class="col-sm-2 col-form-label"
+                      >Thời gian</label
+                    >
+                    <div class="col-sm-10">
+                      <input type="time" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="inputColor" class="col-sm-2 col-form-label"
+                      >Chọn màu</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        type="color"
+                        class="form-control form-control-color"
+                        id="exampleColorInput"
+                        value="#4154f1"
+                        title="Chọn màu sắc của bạn"
+                      />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputPassword" class="col-sm-2 col-form-label"
+                      >Vùng văn bản</label
+                    >
+                    <div class="col-sm-10">
+                      <textarea
+                        class="form-control"
+                        style="height: 100px"
+                      ></textarea>
+                    </div>
+                  </div>
+                  <fieldset class="row mb-3">
+                    <legend class="col-form-label col-sm-2 pt-0">Radio</legend>
+                    <div class="col-sm-10">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gridRadios"
+                          id="gridRadios1"
+                          value="option1"
+                          checked
+                        />
+                        <label class="form-check-label" for="gridRadios1">
+                          Lựa chọn thứ nhất
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gridRadios"
+                          id="gridRadios2"
+                          value="option2"
+                        />
+                        <label class="form-check-label" for="gridRadios2">
+                          Lựa chọn thứ hai
+                        </label>
+                      </div>
+                      <div class="form-check disabled">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gridRadios"
+                          id="gridRadios"
+                          value="option"
+                          disabled
+                        />
+                        <label class="form-check-label" for="gridRadios3">
+                          Lựa chọn bị vô hiệu hóa
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <div class="row mb-3">
+                    <legend class="col-form-label col-sm-2 pt-0">
+                      Hộp kiểm (Checkbox)
+                    </legend>
+                    <div class="col-sm-10">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="gridCheck1"
+                        />
+                        <label class="form-check-label" for="gridCheck1">
+                          Ví dụ hộp kiểm 1
+                        </label>
+                      </div>
+
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="gridCheck2"
+                          checked
+                        />
+                        <label class="form-check-label" for="gridCheck2">
+                          Ví dụ hộp kiểm 2
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Vô hiệu hóa</label>
+                    <div class="col-sm-10">
+                      <input
+                        type="text"
+                        class="form-control"
+                        value="Chỉ đọc / Vô hiệu hóa"
+                        disabled
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label"
+                      >Lựa chọn (Select)</label
+                    >
+                    <div class="col-sm-10">
+                      <select
+                        class="form-select"
+                        aria-label="Default select example"
+                      >
+                        <option selected>Mở menu lựa chọn này</option>
+                        <option value="1">Một</option>
+                        <option value="2">Hai</option>
+                        <option value="3">Ba</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Chọn nhiều</label>
+                    <div class="col-sm-10">
+                      <select
+                        class="form-select"
+                        multiple
+                        aria-label="multiple select example"
+                      >
+                        <option selected>Mở menu lựa chọn này</option>
+                        <option value="1">Một</option>
+                        <option value="2">Hai</option>
+                        <option value="3">Ba</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Nút gửi</label>
+                    <div class="col-sm-10">
+                      <button type="submit" class="btn btn-primary">
+                        Gửi biểu mẫu
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Biểu mẫu Nâng cao</h5>
+
+                <form>
+                  <div class="row mb-5">
+                    <label class="col-sm-2 col-form-label"
+                      >Công tắc (Switch)</label
+                    >
+                    <div class="col-sm-10">
+                      <div class="form-check form-switch">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="flexSwitchCheckDefault"
+                        />
+                        <label
+                          class="form-check-label"
+                          for="flexSwitchCheckDefault"
+                          >Công tắc mặc định</label
+                        >
+                      </div>
+                      <div class="form-check form-switch">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="flexSwitchCheckChecked"
+                          checked
+                        />
+                        <label
+                          class="form-check-label"
+                          for="flexSwitchCheckChecked"
+                          >Công tắc đã chọn</label
+                        >
+                      </div>
+                      <div class="form-check form-switch">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="flexSwitchCheckDisabled"
+                          disabled
+                        />
+                        <label
+                          class="form-check-label"
+                          for="flexSwitchCheckDisabled"
+                          >Công tắc bị vô hiệu hóa</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-5">
+                    <label class="col-sm-2 col-form-label"
+                      >Thanh trượt (Range)</label
+                    >
+                    <div class="col-sm-10">
+                      <div>
+                        <label for="customRange1" class="form-label"
+                          >Ví dụ thanh trượt</label
+                        >
+                        <input
+                          type="range"
+                          class="form-range"
+                          id="customRange1"
+                        />
+                      </div>
+                      <div>
+                        <label for="disabledRange" class="form-label"
+                          >Thanh trượt bị vô hiệu hóa</label
+                        >
+                        <input
+                          type="range"
+                          class="form-range"
+                          id="disabledRange"
+                          disabled
+                        />
+                      </div>
+                      <div>
+                        <label for="customRange2" class="form-label"
+                          >Min và max với các bước nhảy</label
+                        >
+                        <input
+                          type="range"
+                          class="form-range"
+                          min="0"
+                          max="5"
+                          step="0.5"
+                          id="customRange2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label"
+                      >Nhãn nổi (Floating labels)</label
+                    >
+                    <div class="col-sm-10">
+                      <div class="form-floating mb-3">
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="floatingInput"
+                          placeholder="name@example.com"
+                        />
+                        <label for="floatingInput">Địa chỉ Email</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="floatingPassword"
+                          placeholder="Mật khẩu"
+                        />
+                        <label for="floatingPassword">Mật khẩu</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                        <textarea
+                          class="form-control"
+                          placeholder="Để lại bình luận tại đây"
+                          id="floatingTextarea"
+                          style="height: 100px"
+                        ></textarea>
+                        <label for="floatingTextarea">Bình luận</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                        <select
+                          class="form-select"
+                          id="floatingSelect"
+                          aria-label="Floating label select example"
+                        >
+                          <option selected>Mở menu lựa chọn này</option>
+                          <option value="1">Một</option>
+                          <option value="2">Hai</option>
+                          <option value="3">Ba</option>
+                        </select>
+                        <label for="floatingSelect">Hoạt động với select</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-5">
+                    <label class="col-sm-2 col-form-label"
+                      >Nhóm nhập liệu</label
+                    >
+                    <div class="col-sm-10">
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"
+                          >@</span
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Tên người dùng"
+                          aria-label="Username"
+                          aria-describedby="basic-addon1"
+                        />
+                      </div>
+
+                      <div class="input-group mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Tên người nhận"
+                          aria-label="Recipient's username"
+                          aria-describedby="basic-addon2"
+                        />
+                        <span class="input-group-text" id="basic-addon2"
+                          >@example.com</span
+                        >
+                      </div>
+
+                      <label for="basic-url" class="form-label"
+                        >URL tùy chỉnh của bạn</label
+                      >
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3"
+                          >https://example.com/users/</span
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="basic-url"
+                          aria-describedby="basic-addon3"
+                        />
+                      </div>
+
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">$</span>
+                        <input
+                          type="text"
+                          class="form-control"
+                          aria-label="Amount (to the nearest dollar)"
+                        />
+                        <span class="input-group-text">.00</span>
+                      </div>
+
+                      <div class="input-group mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Tên đăng nhập"
+                          aria-label="Username"
+                        />
+                        <span class="input-group-text">@</span>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Máy chủ"
+                          aria-label="Server"
+                        />
+                      </div>
+
+                      <div class="input-group">
+                        <span class="input-group-text">Với textarea</span>
+                        <textarea
+                          class="form-control"
+                          aria-label="With textarea"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="copyright">
+        &copy; Bản quyền <strong><span>NiceAdmin</span></strong
+        >. Bảo lưu mọi quyền
+      </div>
+      <div class="credits">
+        Thiết kế bởi <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </footer>
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+    >
+      <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <script
+      th:src="@{/admin-assets/vendor/apexcharts/apexcharts.min.js}"
+    ></script>
+    <script
+      th:src="@{/admin-assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"
+    ></script>
+    <script th:src="@{/admin-assets/vendor/chart.js/chart.umd.js}"></script>
+    <script th:src="@{/admin-assets/vendor/echarts/echarts.min.js}"></script>
+    <script th:src="@{/admin-assets/vendor/quill/quill.js}"></script>
+    <script
+      th:src="@{/admin-assets/vendor/simple-datatables/simple-datatables.js}"
+    ></script>
+    <script th:src="@{/admin-assets/vendor/tinymce/tinymce.min.js}"></script>
+    <script
+      th:src="@{/admin-assets/vendor/php-email-form/validate.js}"
+    ></script>
+
+    <script th:src="@{/admin-assets/js/main.js}"></script>
+  </body>
+</html>

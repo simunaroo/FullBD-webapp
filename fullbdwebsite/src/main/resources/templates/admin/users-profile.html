@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Users / Profile - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <link th:href="@{/admin-assets/img/favicon.png}" rel="icon" />
+    <link
+      th:href="@{/admin-assets/img/apple-touch-icon.png}"
+      rel="apple-touch-icon"
+    />
+
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      th:href="@{/admin-assets/vendor/bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/boxicons/css/boxicons.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/quill/quill.snow.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/quill/quill.bubble.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/remixicon/remixicon.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/simple-datatables/style.css}"
+      rel="stylesheet"
+    />
+
+    <link th:href="@{/admin-assets/css/style.css}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header id="header" class="header fixed-top d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        <a th:href="@{/admin}" class="logo d-flex align-items-center">
+          <img th:src="@{/admin-assets/img/logo.png}" alt="" />
+          <span class="d-none d-lg-block">FullBD Admin</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+      </div>
+
+      <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+          <li class="nav-item dropdown pe-3">
+            <a
+              class="nav-link nav-profile d-flex align-items-center pe-0"
+              href="#"
+              data-bs-toggle="dropdown"
+            >
+              <img
+                th:src="@{/admin-assets/img/profile-img.jpg}"
+                alt="Profile"
+                class="rounded-circle"
+              />
+              <span
+                class="d-none d-md-block dropdown-toggle ps-2"
+                th:text="${currentUser.fullName}"
+                >User Name</span
+              >
+            </a>
+
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
+            >
+              <li class="dropdown-header">
+                <h6 th:text="${currentUser.fullName}">User Name</h6>
+                <span th:text="${currentUser.job}">Job Title</span>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  th:href="@{/admin/users-profile}"
+                >
+                  <i class="bi bi-person"></i>
+                  <span>Thông tin tài khoản</span>
+                </a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  th:href="@{/logout}"
+                >
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Đăng xuất</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <aside id="sidebar" class="sidebar">
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin}">
+            <i class="bi bi-grid"></i>
+            <span>Bảng điều khiển</span>
+          </a>
+        </li>
+        <li class="nav-heading">Quản lý</li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/categories}">
+            <i class="bi bi-menu-button-wide"></i>
+            <span>Danh mục dự án</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/tables-data}">
+            <i class="bi bi-layout-text-window-reverse"></i>
+            <span>Tất cả dự án</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/quotes-data}">
+            <i class="bi bi-menu-button-wide"></i>
+            <span>Yêu cầu báo giá</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            data-bs-target="#charts-nav"
+            data-bs-toggle="collapse"
+            href="#"
+          >
+            <i class="bi bi-bar-chart"></i><span>Thống kê</span
+            ><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul
+            id="charts-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a th:href="@{/admin/charts-chartjs}">
+                <i class="bi bi-circle"></i><span>Xem biểu đồ</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-heading">Trang khác</li>
+
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/admin/users-profile}">
+            <i class="bi bi-person"></i>
+            <span>Thông tin cá nhân</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/pages-login}">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Đăng nhập</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/}">
+            <i class="bi bi-house-door"></i>
+            <span>Về Trang Chủ</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Hồ sơ cá nhân</h1>
+      </div>
+
+      <section class="section profile">
+        <div class="row">
+          <div class="col-12">
+            <div
+              th:if="${message}"
+              class="alert alert-success alert-dismissible fade show"
+              role="alert"
+            >
+              <i class="bi bi-check-circle me-1"></i>
+              <span th:text="${message}"></span>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div
+              th:if="${error}"
+              class="alert alert-danger alert-dismissible fade show"
+              role="alert"
+            >
+              <i class="bi bi-exclamation-octagon me-1"></i>
+              <span th:text="${error}"></span>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+          </div>
+
+          <div class="col-xl-4">
+            <div class="card">
+              <div
+                class="card-body profile-card pt-4 d-flex flex-column align-items-center"
+              >
+                <img
+                  th:src="@{/admin-assets/img/profile-img.jpg}"
+                  alt="Profile"
+                  class="rounded-circle"
+                />
+                <h2 th:text="${currentUser.fullName}">Kevin Anderson</h2>
+                <h3 th:text="${currentUser.job}">Web Designer</h3>
+                <div class="social-links mt-2">
+                  <a
+                    th:if="${currentUser.twitter}"
+                    th:href="${currentUser.twitter}"
+                    class="twitter"
+                    ><i class="bi bi-twitter"></i
+                  ></a>
+                  <a
+                    th:if="${currentUser.facebook}"
+                    th:href="${currentUser.facebook}"
+                    class="facebook"
+                    ><i class="bi bi-facebook"></i
+                  ></a>
+                  <a
+                    th:if="${currentUser.instagram}"
+                    th:href="${currentUser.instagram}"
+                    class="instagram"
+                    ><i class="bi bi-instagram"></i
+                  ></a>
+                  <a
+                    th:if="${currentUser.linkedin}"
+                    th:href="${currentUser.linkedin}"
+                    class="linkedin"
+                    ><i class="bi bi-linkedin"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-8">
+            <div class="card">
+              <div class="card-body pt-3">
+                <ul class="nav nav-tabs nav-tabs-bordered">
+                  <li class="nav-item">
+                    <button
+                      class="nav-link active"
+                      data-bs-toggle="tab"
+                      data-bs-target="#profile-overview"
+                    >
+                      Tổng quan
+                    </button>
+                  </li>
+                  <li class="nav-item">
+                    <button
+                      class="nav-link"
+                      data-bs-toggle="tab"
+                      data-bs-target="#profile-edit"
+                    >
+                      Chỉnh sửa hồ sơ
+                    </button>
+                  </li>
+                  <li class="nav-item">
+                    <button
+                      class="nav-link"
+                      data-bs-toggle="tab"
+                      data-bs-target="#profile-change-password"
+                    >
+                      Đổi mật khẩu
+                    </button>
+                  </li>
+                </ul>
+
+                <div class="tab-content pt-2">
+                  <div
+                    class="tab-pane fade show active profile-overview"
+                    id="profile-overview"
+                  >
+                    <h5 class="card-title">Giới thiệu</h5>
+                    <p class="small fst-italic" th:text="${currentUser.about}">
+                      ...
+                    </p>
+
+                    <h5 class="card-title">Chi tiết hồ sơ</h5>
+
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Họ và tên</div>
+                      <div
+                        class="col-lg-9 col-md-8"
+                        th:text="${currentUser.fullName}"
+                      ></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Công ty</div>
+                      <div
+                        class="col-lg-9 col-md-8"
+                        th:text="${currentUser.company}"
+                      ></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Công việc</div>
+                      <div
+                        class="col-lg-9 col-md-8"
+                        th:text="${currentUser.job}"
+                      ></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Quốc gia</div>
+                      <div
+                        class="col-lg-9 col-md-8"
+                        th:text="${currentUser.country}"
+                      ></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Địa chỉ</div>
+                      <div
+                        class="col-lg-9 col-md-8"
+                        th:text="${currentUser.address}"
+                      ></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Điện thoại</div>
+                      <div
+                        class="col-lg-9 col-md-8"
+                        th:text="${currentUser.phone}"
+                      ></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3 col-md-4 label">Email</div>
+                      <div
+                        class="col-lg-9 col-md-8"
+                        th:text="${currentUser.email}"
+                      ></div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="tab-pane fade profile-edit pt-3"
+                    id="profile-edit"
+                  >
+                    <form
+                      th:action="@{/admin/profile/update}"
+                      th:object="${currentUser}"
+                      method="post"
+                    >
+                      <input type="hidden" th:field="*{id}" />
+
+                      <div class="row mb-3">
+                        <label
+                          for="fullName"
+                          class="col-md-4 col-lg-3 col-form-label"
+                          >Họ và tên</label
+                        >
+                        <div class="col-md-8 col-lg-9">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="fullName"
+                            th:field="*{fullName}"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label
+                          for="about"
+                          class="col-md-4 col-lg-3 col-form-label"
+                          >Giới thiệu</label
+                        >
+                        <div class="col-md-8 col-lg-9">
+                          <textarea
+                            class="form-control"
+                            id="about"
+                            style="height: 100px"
+                            th:field="*{about}"
+                          ></textarea>
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label
+                          for="company"
+                          class="col-md-4 col-lg-3 col-form-label"
+                          >Công ty</label
+                        >
+                        <div class="col-md-8 col-lg-9">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="company"
+                            th:field="*{company}"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label
+                          for="Job"
+                          class="col-md-4 col-lg-3 col-form-label"
+                          >Công việc</label
+                        >
+                        <div class="col-md-8 col-lg-9">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="Job"
+                            th:field="*{job}"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label
+                          for="Country"
+                          class="col-md-4 col-lg-3 col-form-label"
+                          >Quốc gia</label
+                        >
+                        <div class="col-md-8 col-lg-9">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="Country"
+                            th:field="*{country}"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label
+                          for="Address"
+                          class="col-md-4 col-lg-3 col-form-label"
+                          >Địa chỉ</label
+                        >
+                        <div class="col-md-8 col-lg-9">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="Address"
+                            th:field="*{address}"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label
+                          for="Phone"
+                          class="col-md-4 col-lg-3 col-form-label"
+                          >Điện thoại</label
+                        >
+                        <div class="col-md-8 col-lg-9">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="Phone"
+                            th:field="*{phone}"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label
+                          for="Email"
+                          class="col-md-4 col-lg-3 col-form-label"
+                          >Email</label
+                        >
+                        <div class="col-md-8 col-lg-9">
+                          <input
+                            type="email"
+                            class="form-control"
+                            id="Email"
+                            th:field="*{email}"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label
+                          for="Twitter"
+                          class="col-md-4 col-lg-3 col-form-label"
+                          >Twitter Profile</label
+                        >
+                        <div class="col-md-8 col-lg-9">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="Twitter"
+                            th:field="*{twitter}"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label
+                          for="Facebook"
+                          class="col-md-4 col-lg-3 col-form-label"
+                          >Facebook Profile</label
+                        >
+                        <div class="col-md-8 col-lg-9">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="Facebook"
+                            th:field="*{facebook}"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label
+                          for="Instagram"
+                          class="col-md-4 col-lg-3 col-form-label"
+                          >Instagram Profile</label
+                        >
+                        <div class="col-md-8 col-lg-9">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="Instagram"
+                            th:field="*{instagram}"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label
+                          for="Linkedin"
+                          class="col-md-4 col-lg-3 col-form-label"
+                          >Linkedin Profile</label
+                        >
+                        <div class="col-md-8 col-lg-9">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="Linkedin"
+                            th:field="*{linkedin}"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-primary">
+                          Lưu thay đổi
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+
+                  <div class="tab-pane fade pt-3" id="profile-change-password">
+                    <form
+                      th:action="@{/admin/profile/change-password}"
+                      method="post"
+                    >
+                      <div class="row mb-3">
+                        <label
+                          for="currentPassword"
+                          class="col-md-4 col-lg-3 col-form-label"
+                          >Mật khẩu hiện tại</label
+                        >
+                        <div class="col-md-8 col-lg-9">
+                          <input
+                            name="password"
+                            type="password"
+                            class="form-control"
+                            id="currentPassword"
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label
+                          for="newPassword"
+                          class="col-md-4 col-lg-3 col-form-label"
+                          >Mật khẩu mới</label
+                        >
+                        <div class="col-md-8 col-lg-9">
+                          <input
+                            name="newpassword"
+                            type="password"
+                            class="form-control"
+                            id="newPassword"
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      <div class="row mb-3">
+                        <label
+                          for="renewPassword"
+                          class="col-md-4 col-lg-3 col-form-label"
+                          >Nhập lại mật khẩu mới</label
+                        >
+                        <div class="col-md-8 col-lg-9">
+                          <input
+                            name="renewpassword"
+                            type="password"
+                            class="form-control"
+                            id="renewPassword"
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-primary">
+                          Đổi mật khẩu
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="copyright">
+        &copy; Copyright <strong><span>NiceAdmin</span></strong
+        >. All Rights Reserved
+      </div>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </footer>
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+    >
+      <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <script
+      th:src="@{/admin-assets/vendor/apexcharts/apexcharts.min.js}"
+    ></script>
+    <script
+      th:src="@{/admin-assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"
+    ></script>
+    <script th:src="@{/admin-assets/vendor/chart.js/chart.umd.js}"></script>
+    <script th:src="@{/admin-assets/vendor/echarts/echarts.min.js}"></script>
+    <script th:src="@{/admin-assets/vendor/quill/quill.js}"></script>
+    <script
+      th:src="@{/admin-assets/vendor/simple-datatables/simple-datatables.js}"
+    ></script>
+    <script th:src="@{/admin-assets/vendor/tinymce/tinymce.min.js}"></script>
+    <script
+      th:src="@{/admin-assets/vendor/php-email-form/validate.js}"
+    ></script>
+
+    <script th:src="@{/admin-assets/js/main.js}"></script>
+  </body>
+</html>

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Bố cục Biểu mẫu - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <link th:href="@{/admin-assets/img/favicon.png}" rel="icon" />
+    <link
+      th:href="@{/admin-assets/img/apple-touch-icon.png}"
+      rel="apple-touch-icon"
+    />
+
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <link
+      th:href="@{/admin-assets/vendor/bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/boxicons/css/boxicons.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/quill/quill.snow.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/quill/quill.bubble.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/remixicon/remixicon.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/simple-datatables/style.css}"
+      rel="stylesheet"
+    />
+
+    <link th:href="@{/admin-assets/css/style.css}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header id="header" class="header fixed-top d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        <a th:href="@{/admin}" class="logo d-flex align-items-center">
+          <img th:src="@{/admin-assets/img/logo.png}" alt="" />
+          <span class="d-none d-lg-block">FullBD Admin</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+      </div>
+
+      <div class="search-bar">
+        <form
+          class="search-form d-flex align-items-center"
+          method="POST"
+          action="#"
+        >
+          <input
+            type="text"
+            name="query"
+            placeholder="Tìm kiếm"
+            title="Nhập từ khóa tìm kiếm"
+          />
+          <button type="submit" title="Search">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+      </div>
+
+      <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+          <li class="nav-item d-block d-lg-none">
+            <a class="nav-link nav-icon search-bar-toggle" href="#">
+              <i class="bi bi-search"></i>
+            </a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-bell"></i>
+              <span class="badge bg-primary badge-number">4</span>
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
+            >
+              <li class="dropdown-header">
+                Bạn có 4 thông báo mới
+                <a href="#"
+                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
+                    >Xem tất cả</span
+                  ></a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li class="notification-item">
+                <i class="bi bi-exclamation-circle text-warning"></i>
+                <div>
+                  <h4>Cảnh báo hệ thống</h4>
+                  <p>Vui lòng kiểm tra lại cấu hình...</p>
+                  <p>30 phút trước</p>
+                </div>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li class="dropdown-footer">
+                <a href="#">Xem tất cả thông báo</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown pe-3">
+            <a
+              class="nav-link nav-profile d-flex align-items-center pe-0"
+              href="#"
+              data-bs-toggle="dropdown"
+            >
+              <img
+                th:src="@{/admin-assets/img/profile-img.jpg}"
+                alt="Profile"
+                class="rounded-circle"
+              />
+              <span
+                class="d-none d-md-block dropdown-toggle ps-2"
+                th:text="${currentUser != null ? currentUser.fullName : 'Khách'}"
+                >Khách</span
+              >
+            </a>
+
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
+            >
+              <li class="dropdown-header">
+                <h6
+                  th:text="${currentUser != null ? currentUser.fullName : 'Khách'}"
+                >
+                  Khách
+                </h6>
+                <span
+                  th:text="${currentUser != null ? currentUser.role : 'Người dùng'}"
+                  >Web Designer</span
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  th:href="@{/admin/users-profile}"
+                >
+                  <i class="bi bi-person"></i>
+                  <span>Hồ sơ cá nhân</span>
+                </a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  th:href="@{/logout}"
+                >
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Đăng xuất</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <aside id="sidebar" class="sidebar">
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin}">
+            <i class="bi bi-grid"></i>
+            <span>Bảng điều khiển</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            data-bs-target="#forms-nav"
+            data-bs-toggle="collapse"
+            href="#"
+          >
+            <i class="bi bi-journal-text"></i><span>Biểu mẫu</span
+            ><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul
+            id="forms-nav"
+            class="nav-content collapse show"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a th:href="@{/admin/forms-elements}">
+                <i class="bi bi-circle"></i><span>Thành phần biểu mẫu</span>
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/admin/forms-layouts}" class="active">
+                <i class="bi bi-circle"></i><span>Bố cục biểu mẫu</span>
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/admin/forms-editors}">
+                <i class="bi bi-circle"></i><span>Trình soạn thảo</span>
+              </a>
+            </li>
+            <li>
+              <a th:href="@{/admin/forms-validation}">
+                <i class="bi bi-circle"></i><span>Xác thực dữ liệu</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            data-bs-target="#tables-nav"
+            data-bs-toggle="collapse"
+            href="#"
+          >
+            <i class="bi bi-layout-text-window-reverse"></i
+            ><span>Bảng dữ liệu</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul
+            id="tables-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a th:href="@{/admin/tables-data}">
+                <i class="bi bi-circle"></i><span>Danh sách dự án</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-heading">Trang khác</li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/users-profile}">
+            <i class="bi bi-person"></i>
+            <span>Hồ sơ cá nhân</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/pages-contact}">
+            <i class="bi bi-envelope"></i>
+            <span>Liên hệ</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/pages-register}">
+            <i class="bi bi-card-list"></i>
+            <span>Đăng ký</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/pages-login}">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Đăng nhập</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Bố cục Biểu mẫu</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a th:href="@{/admin}">Trang chủ</a>
+            </li>
+            <li class="breadcrumb-item">Biểu mẫu</li>
+            <li class="breadcrumb-item active">Bố cục</li>
+          </ol>
+        </nav>
+      </div>
+
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Biểu mẫu Ngang</h5>
+
+                <form>
+                  <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label"
+                      >Tên</label
+                    >
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="inputText" />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label"
+                      >Email</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="inputEmail"
+                      />
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label"
+                      >Mật khẩu</label
+                    >
+                    <div class="col-sm-10">
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="inputPassword"
+                      />
+                    </div>
+                  </div>
+                  <fieldset class="row mb-3">
+                    <legend class="col-form-label col-sm-2 pt-0">Radio</legend>
+                    <div class="col-sm-10">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gridRadios"
+                          id="gridRadios1"
+                          value="option1"
+                          checked
+                        />
+                        <label class="form-check-label" for="gridRadios1">
+                          Lựa chọn 1
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gridRadios"
+                          id="gridRadios2"
+                          value="option2"
+                        />
+                        <label class="form-check-label" for="gridRadios2">
+                          Lựa chọn 2
+                        </label>
+                      </div>
+                      <div class="form-check disabled">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="gridRadios"
+                          id="gridRadios3"
+                          value="option3"
+                          disabled
+                        />
+                        <label class="form-check-label" for="gridRadios3">
+                          Lựa chọn bị khóa
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <div class="row mb-3">
+                    <div class="col-sm-10 offset-sm-2">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="gridCheck1"
+                        />
+                        <label class="form-check-label" for="gridCheck1">
+                          Ví dụ hộp kiểm
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Gửi</button>
+                    <button type="reset" class="btn btn-secondary">
+                      Nhập lại
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Biểu mẫu Đa cột</h5>
+
+                <form class="row g-3">
+                  <div class="col-md-12">
+                    <label for="inputName5" class="form-label">Họ và Tên</label>
+                    <input type="text" class="form-control" id="inputName5" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="inputEmail5" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="inputEmail5" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="inputPassword5" class="form-label"
+                      >Mật khẩu</label
+                    >
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="inputPassword5"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <label for="inputAddres5s" class="form-label"
+                      >Địa chỉ</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inputAddres5s"
+                      placeholder="1234 Đường Láng"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <label for="inputAddress2" class="form-label"
+                      >Địa chỉ 2</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inputAddress2"
+                      placeholder="Căn hộ, tòa nhà, tầng"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="inputCity" class="form-label">Thành phố</label>
+                    <input type="text" class="form-control" id="inputCity" />
+                  </div>
+                  <div class="col-md-4">
+                    <label for="inputState" class="form-label"
+                      >Quận/Huyện</label
+                    >
+                    <select id="inputState" class="form-select">
+                      <option selected>Chọn...</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                  <div class="col-md-2">
+                    <label for="inputZip" class="form-label">Mã Zip</label>
+                    <input type="text" class="form-control" id="inputZip" />
+                  </div>
+                  <div class="col-12">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="gridCheck"
+                      />
+                      <label class="form-check-label" for="gridCheck">
+                        Xác nhận thông tin
+                      </label>
+                    </div>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Gửi</button>
+                    <button type="reset" class="btn btn-secondary">
+                      Nhập lại
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Biểu mẫu Dọc</h5>
+
+                <form class="row g-3">
+                  <div class="col-12">
+                    <label for="inputNanme4" class="form-label"
+                      >Họ và Tên</label
+                    >
+                    <input type="text" class="form-control" id="inputNanme4" />
+                  </div>
+                  <div class="col-12">
+                    <label for="inputEmail4" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="inputEmail4" />
+                  </div>
+                  <div class="col-12">
+                    <label for="inputPassword4" class="form-label"
+                      >Mật khẩu</label
+                    >
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="inputPassword4"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <label for="inputAddress" class="form-label">Địa chỉ</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inputAddress"
+                      placeholder="1234 Đường Láng"
+                    />
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Gửi</button>
+                    <button type="reset" class="btn btn-secondary">
+                      Nhập lại
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Biểu mẫu Nhãn nổi (Floating Labels)</h5>
+
+                <form class="row g-3">
+                  <div class="col-md-12">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Họ và Tên"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <input
+                      type="email"
+                      class="form-control"
+                      placeholder="Email"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <input
+                      type="password"
+                      class="form-control"
+                      placeholder="Mật khẩu"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Địa chỉ"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Thành phố"
+                    />
+                  </div>
+                  <div class="col-md-4">
+                    <select id="inputState" class="form-select">
+                      <option selected>Chọn Quận/Huyện...</option>
+                      <option>...</option>
+                    </select>
+                  </div>
+                  <div class="col-md-2">
+                    <input type="text" class="form-control" placeholder="Zip" />
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Gửi</button>
+                    <button type="reset" class="btn btn-secondary">
+                      Nhập lại
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer id="footer" class="footer">
+      <div class="copyright">
+        &copy; Bản quyền <strong><span>NiceAdmin</span></strong
+        >. Bảo lưu mọi quyền
+      </div>
+      <div class="credits">
+        Thiết kế bởi <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </footer>
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+    >
+      <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <script
+      th:src="@{/admin-assets/vendor/apexcharts/apexcharts.min.js}"
+    ></script>
+    <script
+      th:src="@{/admin-assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"
+    ></script>
+    <script th:src="@{/admin-assets/vendor/chart.js/chart.umd.js}"></script>
+    <script th:src="@{/admin-assets/vendor/echarts/echarts.min.js}"></script>
+    <script th:src="@{/admin-assets/vendor/quill/quill.js}"></script>
+    <script
+      th:src="@{/admin-assets/vendor/simple-datatables/simple-datatables.js}"
+    ></script>
+    <script th:src="@{/admin-assets/vendor/tinymce/tinymce.min.js}"></script>
+    <script
+      th:src="@{/admin-assets/vendor/php-email-form/validate.js}"
+    ></script>
+
+    <script th:src="@{/admin-assets/js/main.js}"></script>
+  </body>
+</html>

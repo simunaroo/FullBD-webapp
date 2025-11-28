@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>FULLBD - Xây Dựng Trọn Gói</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <link th:href="@{/assets/img/favicon.png}" rel="icon" />
+    <link
+      th:href="@{/assets/img/apple-touch-icon.png}"
+      rel="apple-touch-icon"
+    />
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+      rel="stylesheet"
+    />
+    <link th:href="@{/assets/vendor/aos/aos.css}" rel="stylesheet" />
+    <link
+      th:href="@{/assets/vendor/glightbox/css/glightbox.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}"
+      rel="stylesheet"
+    />
+
+    <link th:href="@{/assets/css/main.css}" rel="stylesheet" />
+  </head>
+
+  <body class="index-page">
+    <header id="header" class="header d-flex align-items-center fixed-top">
+      <div
+        class="container-fluid container-xl position-relative d-flex align-items-center"
+      >
+        <a th:href="@{/index}" class="logo d-flex align-items-center me-auto">
+          <h1 class="sitename">Xây Dựng FULLBD</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a th:href="@{/index}" class="active">Trang chủ</a></li>
+            <li><a th:href="@{/about}">Giới thiệu</a></li>
+            <li><a th:href="@{/services}">Dịch vụ</a></li>
+            <li><a th:href="@{/projects}">Dự án</a></li>
+            <li><a th:href="@{/team}">Đội ngũ</a></li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>Trang khác</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i>
+              </a>
+              <ul>
+                <li><a th:href="@{/service-details}">Chi tiết Dịch vụ</a></li>
+                <li><a th:href="@{/quote}">Báo giá</a></li>
+                <li>
+                  <a th:href="@{/ai-design}">AI Dự Toán & Thiết Kế Nhanh</a>
+                </li>
+              </ul>
+            </li>
+            <li><a th:href="@{/contact}">Liên hệ</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <a class="btn-getstarted d-none d-sm-block" th:href="@{/quote}"
+          >Yêu Cầu Báo Giá</a
+        >
+      </div>
+    </header>
+
+    <main class="main">
+      <section id="hero" class="hero section dark-background">
+        <div class="hero-video-container">
+          <video autoplay="" muted="" loop="">
+            <source
+              th:src="@{/assets/img/construction/video-1.mp4}"
+              type="video/mp4"
+            />
+            Trình duyệt của bạn không hỗ trợ thẻ video.
+          </video>
+          <div class="hero-overlay"></div>
+        </div>
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+              <div class="hero-content">
+                <h1 data-aos="fade-up" data-aos-delay="200">
+                  Kiến Tạo Sự Xuất Sắc Bằng Dịch Vụ Chuyên Nghiệp
+                </h1>
+                <p data-aos="fade-up" data-aos-delay="300">
+                  Chúng tôi cung cấp giải pháp xây dựng toàn diện với cam kết
+                  vững chắc về chất lượng, an toàn và tiến độ. Hãy để đội ngũ
+                  giàu kinh nghiệm của chúng tôi hiện thực hóa tầm nhìn của bạn
+                  với sự chính xác tuyệt đối.
+                </p>
+
+                <div
+                  class="hero-actions"
+                  data-aos="fade-up"
+                  data-aos-delay="400"
+                >
+                  <a th:href="@{/quote}" class="btn btn-primary"
+                    >Yêu Cầu Báo Giá</a
+                  >
+                  <a th:href="@{/projects}" class="btn btn-secondary"
+                    >Xem Dự Án</a
+                  >
+                </div>
+
+                <div class="hero-stats" data-aos="fade-up" data-aos-delay="500">
+                  <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                      <div class="stat-item">
+                        <span
+                          class="stat-number"
+                          data-purecounter-start="0"
+                          data-purecounter-end="250"
+                          data-purecounter-duration="2"
+                          >250</span
+                        >
+                        <span class="stat-label">Dự án hoàn thành</span>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                      <div class="stat-item">
+                        <span
+                          class="stat-number"
+                          data-purecounter-start="0"
+                          data-purecounter-end="15"
+                          data-purecounter-duration="2"
+                          >15</span
+                        >
+                        <span class="stat-label">Năm kinh nghiệm</span>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                      <div class="stat-item">
+                        <span
+                          class="stat-number"
+                          data-purecounter-start="0"
+                          data-purecounter-end="98"
+                          data-purecounter-duration="2"
+                          >98</span
+                        >
+                        <span class="stat-label">% Khách hàng hài lòng</span>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                      <div class="stat-item">
+                        <span
+                          class="stat-number"
+                          data-purecounter-start="0"
+                          data-purecounter-end="50"
+                          data-purecounter-duration="2"
+                          >50</span
+                        >
+                        <span class="stat-label">Chuyên gia</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="about" class="about section">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row align-items-center">
+            <div
+              class="col-lg-6 order-2 order-lg-1"
+              data-aos="fade-right"
+              data-aos-delay="200"
+            >
+              <div class="content">
+                <h2 class="section-heading mb-4">
+                  Xây Dựng Từ Sự Xuất Sắc, Dẫn Lối Bởi Tầm Nhìn
+                </h2>
+                <p class="lead-text mb-4">
+                  Chúng tôi không chỉ xây dựng những ngôi nhà, chúng tôi kiến
+                  tạo không gian sống. Với sứ mệnh mang lại giá trị thực cho
+                  khách hàng, FULLBD luôn đặt chất lượng và sự tận tâm lên hàng
+                  đầu.
+                </p>
+                <p class="description-text mb-5">
+                  Trải qua nhiều năm hình thành và phát triển, chúng tôi tự hào
+                  sở hữu đội ngũ kỹ sư, kiến trúc sư và công nhân lành nghề. Quy
+                  trình làm việc chuyên nghiệp từ khâu tư vấn, thiết kế đến thi
+                  công giúp tối ưu hóa chi phí và thời gian cho khách hàng, đồng
+                  thời đảm bảo công trình luôn đạt tiêu chuẩn kỹ thuật cao nhất.
+                </p>
+
+                <div class="stats-grid">
+                  <div
+                    class="stat-item"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                  >
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Năm Kinh nghiệm</div>
+                  </div>
+                  <div
+                    class="stat-item"
+                    data-aos="fade-up"
+                    data-aos-delay="350"
+                  >
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Dự án Hoàn thành</div>
+                  </div>
+                  <div
+                    class="stat-item"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                  >
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Khách hàng Hài lòng</div>
+                  </div>
+                </div>
+
+                <div
+                  class="cta-section"
+                  data-aos="fade-up"
+                  data-aos-delay="450"
+                >
+                  <a href="#services" class="cta-link">
+                    Khám phá Dịch vụ
+                    <i class="bi bi-arrow-right ms-2"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-6 order-1 order-lg-2"
+              data-aos="fade-left"
+              data-aos-delay="200"
+            >
+              <div class="image-section">
+                <div class="main-image">
+                  <img
+                    th:src="@{/assets/img/construction/project-4.webp}"
+                    alt="Dự án xây dựng tiêu biểu"
+                    class="img-fluid"
+                  />
+                </div>
+                <div
+                  class="floating-badge"
+                  data-aos="zoom-in"
+                  data-aos-delay="500"
+                >
+                  <div class="badge-content">
+                    <i class="bi bi-award"></i>
+                    <div class="badge-text">
+                      <span class="badge-title">Chứng nhận Chất lượng</span>
+                      <span class="badge-subtitle">Từ năm 1999</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="services" class="services section light-background">
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Dịch vụ</h2>
+          <p>
+            Cung cấp các giải pháp xây dựng đa dạng, đáp ứng mọi nhu cầu từ dân
+            dụng đến công nghiệp
+          </p>
+        </div>
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="services-grid">
+            <div class="service-item" data-aos="fade-up" data-aos-delay="150">
+              <div class="service-number">01</div>
+              <div class="service-icon">
+                <i class="bi bi-buildings"></i>
+              </div>
+              <h3>Xây dựng Thương mại</h3>
+              <p>
+                Giải pháp toàn diện cho tòa nhà văn phòng, trung tâm thương mại
+                và không gian bán lẻ với độ chính xác cao.
+              </p>
+              <a th:href="@{/service-details}" class="service-cta">
+                <span>Xem chi tiết</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="service-item" data-aos="fade-up" data-aos-delay="200">
+              <div class="service-number">02</div>
+              <div class="service-icon">
+                <i class="bi bi-house-heart"></i>
+              </div>
+              <h3>Nhà ở Dân dụng</h3>
+              <p>
+                Biến ngôi nhà mơ ước thành hiện thực với dịch vụ xây dựng và cải
+                tạo nhà ở chú trọng từng chi tiết nhỏ.
+              </p>
+              <a th:href="@{/service-details}" class="service-cta">
+                <span>Xem chi tiết</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+
+            <div
+              class="service-item featured"
+              data-aos="fade-up"
+              data-aos-delay="250"
+            >
+              <div class="featured-badge">Nổi bật</div>
+              <div class="service-number">03</div>
+              <div class="service-icon">
+                <i class="bi bi-gear-wide-connected"></i>
+              </div>
+              <h3>Thiết kế & Thi công</h3>
+              <p>
+                Quy trình khép kín từ thiết kế kiến trúc đến thi công hoàn
+                thiện, giúp dự án triển khai liền mạch.
+              </p>
+              <a th:href="@{/quote}" class="service-cta">
+                <span>Nhận báo giá</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="service-item" data-aos="fade-up" data-aos-delay="300">
+              <div class="service-number">04</div>
+              <div class="service-icon">
+                <i class="bi bi-clipboard2-check"></i>
+              </div>
+              <h3>Tư vấn Dự án</h3>
+              <p>
+                Tư vấn chuyên môn và lập kế hoạch chiến lược cho mọi giai đoạn
+                của dự án xây dựng.
+              </p>
+              <a th:href="@{/service-details}" class="service-cta">
+                <span>Xem chi tiết</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="service-item" data-aos="fade-up" data-aos-delay="350">
+              <div class="service-number">05</div>
+              <div class="service-icon">
+                <i class="bi bi-tools"></i>
+              </div>
+              <h3>Cải tạo & Sửa chữa</h3>
+              <p>
+                Nâng cấp không gian sống hiện đại nhưng vẫn giữ được kết cấu
+                vững chắc và thẩm mỹ vốn có.
+              </p>
+              <a th:href="@{/service-details}" class="service-cta">
+                <span>Xem chi tiết</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="service-item" data-aos="fade-up" data-aos-delay="400">
+              <div class="service-number">06</div>
+              <div class="service-icon">
+                <i class="bi bi-arrows-fullscreen"></i>
+              </div>
+              <h3>Chuẩn bị Mặt bằng</h3>
+              <p>
+                Thi công đào đất, san lấp và lắp đặt hệ thống hạ tầng kỹ thuật,
+                tạo nền móng vững chắc cho công trình.
+              </p>
+              <a th:href="@{/service-details}" class="service-cta">
+                <span>Xem chi tiết</span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="services-alt" class="services-alt section light-background">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row g-5">
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="service-item">
+                <div class="service-visual">
+                  <img
+                    th:src="@{/assets/img/construction/project-3.webp}"
+                    alt="Tổng thầu xây dựng"
+                    class="img-fluid"
+                  />
+                </div>
+                <div class="service-content">
+                  <h3>Tổng thầu Xây dựng</h3>
+                  <p>
+                    Quản lý toàn diện từ khâu lập kế hoạch đến hoàn thiện. Chúng
+                    tôi điều phối mọi khía cạnh, đảm bảo tiến độ và chất lượng
+                    vượt trội.
+                  </p>
+                  <a href="#" class="service-link">
+                    <span>Tìm hiểu thêm</span>
+                    <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+              <div class="service-item">
+                <div class="service-visual">
+                  <img
+                    th:src="@{/assets/img/construction/project-7.webp}"
+                    alt="Cải tạo nhà ở"
+                    class="img-fluid"
+                  />
+                </div>
+                <div class="service-content">
+                  <h3>Cải tạo Nhà ở</h3>
+                  <p>
+                    Biến đổi ngôi nhà của bạn với dịch vụ cải tạo chuyên nghiệp.
+                    Từ nhà bếp đến toàn bộ ngôi nhà, chúng tôi nâng tầm không
+                    gian sống của bạn.
+                  </p>
+                  <a href="#" class="service-link">
+                    <span>Tìm hiểu thêm</span>
+                    <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+              <div class="service-item">
+                <div class="service-visual">
+                  <img
+                    th:src="@{/assets/img/construction/project-11.webp}"
+                    alt="Xây dựng thương mại"
+                    class="img-fluid"
+                  />
+                </div>
+                <div class="service-content">
+                  <h3>Xây dựng Thương mại</h3>
+                  <p>
+                    Xây dựng nền tảng thành công cho doanh nghiệp. Chuyên về tòa
+                    nhà văn phòng, bán lẻ và cơ sở công nghiệp đáp ứng mọi ngân
+                    sách.
+                  </p>
+                  <a href="#" class="service-link">
+                    <span>Tìm hiểu thêm</span>
+                    <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="350">
+              <div class="service-item">
+                <div class="service-visual">
+                  <img
+                    th:src="@{/assets/img/construction/project-5.webp}"
+                    alt="Quản lý dự án"
+                    class="img-fluid"
+                  />
+                </div>
+                <div class="service-content">
+                  <h3>Quản lý Dự án</h3>
+                  <p>
+                    Giám sát chuyên nghiệp đảm bảo đúng tiến độ và ngân sách.
+                    Các quản lý giàu kinh nghiệm sẽ duy trì tiêu chuẩn chất
+                    lượng cao nhất.
+                  </p>
+                  <a href="#" class="service-link">
+                    <span>Tìm hiểu thêm</span>
+                    <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-5" data-aos="fade-up" data-aos-delay="400">
+            <div class="col-lg-12 text-center">
+              <div class="cta-section">
+                <h4>Bạn đã sẵn sàng bắt đầu dự án tiếp theo?</h4>
+                <p>
+                  Hãy liên hệ với chúng tôi để thảo luận nhu cầu và nhận báo giá
+                  phù hợp nhất cho dự án của bạn.
+                </p>
+                <a th:href="@{/quote}" class="btn-primary">
+                  <span>Nhận Báo Giá Miễn Phí</span>
+                  <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="projects" class="projects section">
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Dự án Tiêu biểu</h2>
+          <p>
+            Khám phá những công trình đã hoàn thành khẳng định chất lượng và uy
+            tín của chúng tôi
+          </p>
+        </div>
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row gy-4">
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="100"
+              th:each="project : ${projects}"
+            >
+              <div class="project-card">
+                <div class="project-image">
+                  <img
+                    th:src="@{${project.image}}"
+                    alt="Hình ảnh dự án"
+                    class="img-fluid"
+                    style="height: 300px; width: 100%; object-fit: cover"
+                  />
+
+                  <div class="project-overlay">
+                    <div
+                      class="project-status completed"
+                      th:text="${project.status}"
+                    >
+                      Hoàn thành
+                    </div>
+
+                    <div class="project-actions">
+                      <a
+                        th:href="@{/project-details(id=${project.id})}"
+                        class="btn-project"
+                      >
+                        Xem chi tiết
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="project-info">
+                  <div
+                    class="project-category"
+                    th:text="${project.category != null ? project.category.name : 'Tổng hợp'}"
+                  >
+                    Danh mục
+                  </div>
+
+                  <h4 class="project-title" th:text="${project.title}">
+                    Tên dự án
+                  </h4>
+
+                  <p
+                    class="project-description"
+                    th:text="${project.description != null && project.description.length() > 80 ? project.description.substring(0, 80) + '...' : project.description}"
+                  >
+                    Mô tả dự án...
+                  </p>
+
+                  <div class="project-meta">
+                    <span class="location">
+                      <i class="bi bi-geo-alt"></i> Việt Nam
+                    </span>
+                    <span class="timeline">
+                      <i class="bi bi-person"></i>
+                      <span th:text="${project.client}">Khách hàng</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 text-center" th:if="${projects.isEmpty()}">
+              <p>Hiện chưa có dự án tiêu biểu nào được cập nhật.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="testimonials" class="testimonials section">
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Khách hàng nói gì về chúng tôi</h2>
+          <p>
+            Sự hài lòng của khách hàng là minh chứng rõ nhất cho chất lượng dịch
+            vụ
+          </p>
+        </div>
+        <div class="container">
+          <div class="testimonial-masonry">
+            <div class="testimonial-item" data-aos="fade-up">
+              <div class="testimonial-content">
+                <div class="quote-pattern">
+                  <i class="bi bi-quote"></i>
+                </div>
+                <p>
+                  Việc triển khai các giải pháp sáng tạo của FULLBD đã giúp
+                  chúng tôi tối ưu hóa không gian làm việc và nâng cao hiệu suất
+                  đáng kể.
+                </p>
+                <div class="client-info">
+                  <div class="client-image">
+                    <img
+                      th:src="@{/assets/img/person/person-f-7.webp}"
+                      alt="Client"
+                    />
+                  </div>
+                  <div class="client-details">
+                    <h3>Thu Hà</h3>
+                    <span class="position">Giám đốc Chiến lược</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="testimonial-item highlight"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div class="testimonial-content">
+                <div class="quote-pattern">
+                  <i class="bi bi-quote"></i>
+                </div>
+                <p>
+                  Dịch vụ chuyên nghiệp và sự tận tâm của đội ngũ đã mang lại
+                  kết quả vượt ngoài mong đợi. Ngôi nhà mới thực sự là niềm tự
+                  hào của gia đình tôi.
+                </p>
+                <div class="client-info">
+                  <div class="client-image">
+                    <img
+                      th:src="@{/assets/img/person/person-m-7.webp}"
+                      alt="Client"
+                    />
+                  </div>
+                  <div class="client-details">
+                    <h3>Minh Tuấn</h3>
+                    <span class="position">Chủ đầu tư</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="testimonial-item"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div class="testimonial-content">
+                <div class="quote-pattern">
+                  <i class="bi bi-quote"></i>
+                </div>
+                <p>
+                  Đối tác tin cậy cho các dự án công nghiệp. Quy trình làm việc
+                  minh bạch và cam kết tiến độ tuyệt đối.
+                </p>
+                <div class="client-info">
+                  <div class="client-image">
+                    <img
+                      th:src="@{/assets/img/person/person-f-8.webp}"
+                      alt="Client"
+                    />
+                  </div>
+                  <div class="client-details">
+                    <h3>Lan Phương</h3>
+                    <span class="position">Trưởng ban Dự án</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        id="certifications"
+        class="certifications section light-background"
+      >
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Chứng nhận &amp; Uy tín</h2>
+          <p>Cam kết chất lượng được khẳng định qua các chứng chỉ quốc tế</p>
+        </div>
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row gy-5 mt-4">
+            <div
+              class="col-lg-3 col-md-6"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
+              <div class="certification-item">
+                <div class="certification-badge">
+                  <img
+                    th:src="@{/assets/img/construction/badge-1.webp}"
+                    alt="ISO 9001"
+                    class="img-fluid"
+                  />
+                </div>
+                <h4>ISO 9001</h4>
+                <p>
+                  Hệ thống quản lý chất lượng đạt chuẩn quốc tế, đảm bảo quy
+                  trình nhất quán.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-3 col-md-6"
+              data-aos="zoom-in"
+              data-aos-delay="200"
+            >
+              <div class="certification-item">
+                <div class="certification-badge">
+                  <img
+                    th:src="@{/assets/img/construction/badge-2.webp}"
+                    alt="OSHA Safety"
+                    class="img-fluid"
+                  />
+                </div>
+                <h4>An toàn Lao động</h4>
+                <p>
+                  Tuân thủ nghiêm ngặt các tiêu chuẩn an toàn vệ sinh lao động
+                  tại công trường.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-3 col-md-6"
+              data-aos="zoom-in"
+              data-aos-delay="300"
+            >
+              <div class="certification-item">
+                <div class="certification-badge">
+                  <img
+                    th:src="@{/assets/img/construction/badge-3.webp}"
+                    alt="Licensed"
+                    class="img-fluid"
+                  />
+                </div>
+                <h4>Giấy phép & Bảo hiểm</h4>
+                <p>
+                  Hoạt động hợp pháp với đầy đủ bảo hiểm công trình, bảo vệ tối
+                  đa quyền lợi khách hàng.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-3 col-md-6"
+              data-aos="zoom-in"
+              data-aos-delay="400"
+            >
+              <div class="certification-item">
+                <div class="certification-badge">
+                  <img
+                    th:src="@{/assets/img/construction/badge-4.webp}"
+                    alt="Green Building"
+                    class="img-fluid"
+                  />
+                </div>
+                <h4>Công trình Xanh</h4>
+                <p>
+                  Ứng dụng giải pháp xây dựng bền vững và thân thiện với môi
+                  trường.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-5" data-aos="fade-up" data-aos-delay="500">
+            <div class="col-12">
+              <div class="certification-stats">
+                <div class="row text-center">
+                  <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-item">
+                      <h3>25+</h3>
+                      <p>Năm hoạt động</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-item">
+                      <h3>500+</h3>
+                      <p>Dự án hoàn thành</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-item">
+                      <h3>12</h3>
+                      <p>Giải thưởng ngành</p>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stat-item">
+                      <h3>100%</h3>
+                      <p>An toàn lao động</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        id="call-to-action"
+        class="call-to-action section light-background"
+      >
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row justify-content-center">
+            <div class="col-lg-10">
+              <div
+                class="cta-header text-center"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
+                <h2>Biến Tầm Nhìn Của Bạn Thành Hiện Thực</h2>
+                <p>
+                  Chúng tôi sẵn sàng lắng nghe ý tưởng của bạn. Đội ngũ chuyên
+                  gia tận tâm sẽ đồng hành cùng bạn từ khâu lên ý tưởng đến khi
+                  bàn giao chìa khóa trao tay.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta-main" data-aos="fade-up" data-aos-delay="300">
+            <div class="row align-items-center g-5">
+              <div class="col-lg-6">
+                <div class="achievements-grid">
+                  <div
+                    class="achievement-item"
+                    data-aos="zoom-in"
+                    data-aos-delay="400"
+                  >
+                    <div class="achievement-icon">
+                      <i class="bi bi-tools"></i>
+                    </div>
+                    <div class="achievement-info">
+                      <h3>750+</h3>
+                      <span>Hạng mục thi công</span>
+                    </div>
+                  </div>
+
+                  <div
+                    class="achievement-item"
+                    data-aos="zoom-in"
+                    data-aos-delay="550"
+                  >
+                    <div class="achievement-icon">
+                      <i class="bi bi-star-fill"></i>
+                    </div>
+                    <div class="achievement-info">
+                      <h3>95%</h3>
+                      <span>Khách hàng quay lại</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div
+                  class="action-panel"
+                  data-aos="fade-left"
+                  data-aos-delay="350"
+                >
+                  <div class="panel-content">
+                    <h3>Sẵn sàng khởi công?</h3>
+                    <p>
+                      Đừng ngần ngại liên hệ với chúng tôi ngay hôm nay để được
+                      tư vấn miễn phí và nhận báo giá chi tiết cho dự án của
+                      bạn.
+                    </p>
+
+                    <div class="action-buttons">
+                      <a th:href="@{/quote}" class="btn-primary">
+                        <span>Yêu cầu Báo giá</span>
+                        <i class="bi bi-arrow-right"></i>
+                      </a>
+                      <a href="#projects" class="btn-secondary">
+                        <span>Xem Thư viện ảnh</span>
+                        <i class="bi bi-eye"></i>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div class="contact-quick">
+                    <div class="contact-row">
+                      <i class="bi bi-telephone-fill"></i>
+                      <div class="contact-details">
+                        <span class="contact-label">Hotline tư vấn</span>
+                        <span class="contact-value">+84 90 123 4567</span>
+                      </div>
+                    </div>
+
+                    <div class="contact-row">
+                      <i class="bi bi-envelope-fill"></i>
+                      <div class="contact-details">
+                        <span class="contact-label"
+                          >Gửi email cho chúng tôi</span
+                        >
+                        <span class="contact-value">lienhe@fullbd.com</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="footer" class="footer dark-background">
+      <div class="container">
+        <div class="row gy-5">
+          <div class="col-lg-4">
+            <div class="footer-brand">
+              <a th:href="@{/}" class="logo d-flex align-items-center mb-3">
+                <span class="sitename">iConstruction</span>
+              </a>
+              <p class="tagline">
+                Đổi mới cảnh quan kỹ thuật số với các giải pháp thanh lịch và
+                thiết kế vượt thời gian.
+              </p>
+
+              <div class="social-links mt-4">
+                <a href="#" aria-label="Facebook"
+                  ><i class="bi bi-facebook"></i
+                ></a>
+                <a href="#" aria-label="Instagram"
+                  ><i class="bi bi-instagram"></i
+                ></a>
+                <a href="#" aria-label="LinkedIn"
+                  ><i class="bi bi-linkedin"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="footer-links-grid">
+              <div class="row">
+                <div class="col-6 col-md-4">
+                  <h5>Công ty</h5>
+                  <ul class="list-unstyled">
+                    <li><a href="#">Về Chúng tôi</a></li>
+                    <li><a href="#">Đội ngũ</a></li>
+                    <li><a href="#">Tuyển dụng</a></li>
+                    <li><a href="#">Tin tức</a></li>
+                  </ul>
+                </div>
+                <div class="col-6 col-md-4">
+                  <h5>Dịch vụ</h5>
+                  <ul class="list-unstyled">
+                    <li><a href="#">Xây dựng Dân dụng</a></li>
+                    <li><a href="#">Thiết kế Kiến trúc</a></li>
+                    <li><a href="#">Quản lý Dự án</a></li>
+                    <li><a href="#">Trang trí Nội thất</a></li>
+                  </ul>
+                </div>
+                <div class="col-6 col-md-4">
+                  <h5>Hỗ trợ</h5>
+                  <ul class="list-unstyled">
+                    <li><a href="#">Trung tâm Trợ giúp</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="#">Chính sách</a></li>
+                    <li><a href="#">Điều khoản</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2">
+            <div class="footer-cta">
+              <h5>Kết nối ngay</h5>
+              <a th:href="@{/contact}" class="btn btn-outline">Liên hệ</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="footer-bottom-content">
+                <p class="mb-0">
+                  © <span class="sitename">Myebsite</span>. Bảo lưu mọi quyền.
+                </p>
+                <div class="credits">
+                  Thiết kế bởi
+                  <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <div id="preloader"></div>
+
+    <script
+      th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"
+    ></script>
+    <script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+    <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+    <script
+      th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"
+    ></script>
+    <script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+    <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+
+    <script th:src="@{/assets/js/main.js}"></script>
+  </body>
+</html>

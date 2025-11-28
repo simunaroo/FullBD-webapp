@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Chi tiết Dự án - Xây Nhà Trọn Gói FULLBD</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <link th:href="@{/assets/img/favicon.png}" rel="icon" />
+    <link
+      th:href="@{/assets/img/apple-touch-icon.png}"
+      rel="apple-touch-icon"
+    />
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+      rel="stylesheet"
+    />
+    <link th:href="@{/assets/vendor/aos/aos.css}" rel="stylesheet" />
+    <link
+      th:href="@{/assets/vendor/glightbox/css/glightbox.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}"
+      rel="stylesheet"
+    />
+
+    <link th:href="@{/assets/css/main.css}" rel="stylesheet" />
+  </head>
+
+  <body class="project-details-page">
+    <header id="header" class="header d-flex align-items-center fixed-top">
+      <div
+        class="container-fluid container-xl position-relative d-flex align-items-center"
+      >
+        <a th:href="@{/}" class="logo d-flex align-items-center me-auto">
+          <h1 class="sitename">Xây Dựng FULLBD</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a th:href="@{/}">Trang chủ</a></li>
+            <li><a th:href="@{/about}">Giới thiệu</a></li>
+            <li><a th:href="@{/services}">Dịch vụ</a></li>
+            <li><a th:href="@{/projects}">Dự án</a></li>
+            <li><a th:href="@{/team}">Đội ngũ</a></li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>Trang khác</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i
+              ></a>
+              <ul>
+                <li><a th:href="@{/service-details}">Chi tiết Dịch vụ</a></li>
+                <li>
+                  <a th:href="@{/project-details}" class="active"
+                    >Chi tiết Dự án</a
+                  >
+                </li>
+                <li><a th:href="@{/quote}">Báo giá</a></li>
+                <li>
+                  <a th:href="@{/ai-design}">AI Dự Toán & Thiết Kế Nhanh</a>
+                </li>
+              </ul>
+            </li>
+
+            <li><a th:href="@{/contact}">Liên hệ</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <a class="btn-getstarted d-none d-sm-block" th:href="@{/quote}"
+          >Yêu cầu Báo giá</a
+        >
+      </div>
+    </header>
+
+    <main class="main">
+      <div
+        class="page-title dark-background"
+        data-aos="fade"
+        th:style="'background-image: url(' + @{/assets/img/construction/showcase-2.webp} + ')'"
+      >
+        <div class="container position-relative">
+          <h1>Chi tiết Dự án</h1>
+          <p>
+            Khám phá chi tiết về quy mô, thiết kế và quá trình thi công các dự
+            án tiêu biểu mà chúng tôi đã thực hiện.
+          </p>
+          <nav class="breadcrumbs">
+            <ol>
+              <li><a th:href="@{/}">Trang chủ</a></li>
+              <li class="current">Chi tiết Dự án</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <section id="project-details" class="project-details section">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row">
+            <div class="col-lg-8">
+              <div
+                class="project-hero"
+                data-aos="zoom-out"
+                data-aos-delay="200"
+              >
+                <img
+                  th:src="@{${project.image}}"
+                  th:alt="${project.title}"
+                  class="img-fluid"
+                />
+                <div class="project-hero-overlay">
+                  <div class="project-status" th:text="${project.status}">
+                    Hoàn thành
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div
+                class="project-info"
+                data-aos="fade-left"
+                data-aos-delay="300"
+              >
+                <div class="project-meta">
+                  <span
+                    class="category"
+                    th:text="${project.category != null ? project.category.name : ''}"
+                    >Danh mục</span
+                  >
+                  <span class="location">Việt Nam</span>
+                </div>
+                <h1 class="project-title" th:text="${project.title}">
+                  Tên Dự án
+                </h1>
+
+                <p class="project-description" th:text="${project.description}">
+                  Mô tả dự án...
+                </p>
+
+                <div class="project-details">
+                  <div class="detail-item">
+                    <span class="label">Khách hàng</span>
+                    <span class="value" th:text="${project.client}"
+                      >Tên Khách hàng</span
+                    >
+                  </div>
+                  <div class="detail-item">
+                    <span class="label">Danh mục</span>
+                    <span
+                      class="value"
+                      th:text="${project.category != null ? project.category.name : ''}"
+                      >Tên Danh mục</span
+                    >
+                  </div>
+                  <div class="detail-item">
+                    <span class="label">Trạng thái</span>
+                    <span class="value" th:text="${project.status}"
+                      >Trạng thái</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="footer" class="footer dark-background">
+      <div class="container">
+        <div class="row gy-5">
+          <div class="col-lg-4">
+            <div class="footer-brand">
+              <a th:href="@{/}" class="logo d-flex align-items-center mb-3">
+                <span class="sitename">iConstruction</span>
+              </a>
+              <p class="tagline">
+                Đổi mới cảnh quan kỹ thuật số với các giải pháp thanh lịch và
+                thiết kế vượt thời gian.
+              </p>
+
+              <div class="social-links mt-4">
+                <a href="#" aria-label="Facebook"
+                  ><i class="bi bi-facebook"></i
+                ></a>
+                <a href="#" aria-label="Instagram"
+                  ><i class="bi bi-instagram"></i
+                ></a>
+                <a href="#" aria-label="LinkedIn"
+                  ><i class="bi bi-linkedin"></i
+                ></a>
+                <a href="#" aria-label="Twitter"
+                  ><i class="bi bi-twitter-x"></i
+                ></a>
+                <a href="#" aria-label="Dribbble"
+                  ><i class="bi bi-dribbble"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="footer-links-grid">
+              <div class="row">
+                <div class="col-6 col-md-4">
+                  <h5>Công ty</h5>
+                  <ul class="list-unstyled">
+                    <li><a href="#">Về Chúng tôi</a></li>
+                    <li><a href="#">Đội ngũ</a></li>
+                    <li><a href="#">Tuyển dụng</a></li>
+                    <li><a href="#">Tin tức</a></li>
+                  </ul>
+                </div>
+                <div class="col-6 col-md-4">
+                  <h5>Dịch vụ</h5>
+                  <ul class="list-unstyled">
+                    <li><a href="#">Xây dựng Dân dụng</a></li>
+                    <li><a href="#">Thiết kế Kiến trúc</a></li>
+                    <li><a href="#">Quản lý Dự án</a></li>
+                    <li><a href="#">Trang trí Nội thất</a></li>
+                  </ul>
+                </div>
+                <div class="col-6 col-md-4">
+                  <h5>Hỗ trợ</h5>
+                  <ul class="list-unstyled">
+                    <li><a href="#">Trung tâm Trợ giúp</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="#">Chính sách Riêng tư</a></li>
+                    <li><a href="#">Điều khoản Dịch vụ</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2">
+            <div class="footer-cta">
+              <h5>Kết nối ngay</h5>
+              <a th:href="@{/contact}" class="btn btn-outline">Liên hệ</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="footer-bottom-content">
+                <p class="mb-0">
+                  © <span class="sitename">Myebsite</span>. Bảo lưu mọi quyền.
+                </p>
+                <div class="credits">
+                  Thiết kế bởi
+                  <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <div id="preloader"></div>
+
+    <script
+      th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"
+    ></script>
+    <script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+    <script th:src="@{/assets/vendor/aos/aos.js}"></script>
+    <script
+      th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"
+    ></script>
+    <script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+    <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+
+    <script th:src="@{/assets/js/main.js}"></script>
+  </body>
+</html>

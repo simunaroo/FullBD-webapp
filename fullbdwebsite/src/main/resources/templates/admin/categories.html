@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Dashboard - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <link th:href="@{/admin-assets/img/favicon.png}" rel="icon" />
+    <link
+      th:href="@{/admin-assets/img/apple-touch-icon.png}"
+      rel="apple-touch-icon"
+    />
+
+    <link href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      th:href="@{/admin-assets/vendor/bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/boxicons/css/boxicons.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/quill/quill.snow.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/quill/quill.bubble.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/remixicon/remixicon.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/simple-datatables/style.css}"
+      rel="stylesheet"
+    />
+
+    <link th:href="@{/admin-assets/css/style.css}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header id="header" class="header fixed-top d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        <a th:href="@{/admin}" class="logo d-flex align-items-center">
+          <img th:src="@{/admin-assets/img/logo.png}" alt="" />
+          <span class="d-none d-lg-block">FullBD Admin</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+      </div>
+      <div class="search-bar">
+        <form
+          class="search-form d-flex align-items-center"
+          method="POST"
+          action="#"
+        >
+          <input
+            type="text"
+            name="query"
+            placeholder="Tìm kiếm"
+            title="Nhập từ khóa tìm kiếm"
+          />
+          <button type="submit" title="Search">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+      </div>
+      <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+          <li class="nav-item d-block d-lg-none">
+            <a class="nav-link nav-icon search-bar-toggle" href="#">
+              <i class="bi bi-search"></i>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-bell"></i>
+              <span class="badge bg-primary badge-number">4</span>
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
+            >
+              <li class="dropdown-header">
+                Bạn có 4 thông báo mới
+                <a href="#"
+                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
+                    >Xem tất cả</span
+                  ></a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+
+              <li class="notification-item">
+                <i class="bi bi-exclamation-circle text-warning"></i>
+                <div>
+                  <h4>Lorem Ipsum</h4>
+                  <p>Quae dolorem earum veritatis oditseno</p>
+                  <p>30 min. ago</p>
+                </div>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+
+              <li class="dropdown-footer">
+                <a href="#">Tất cả thông báo</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+              <i class="bi bi-chat-left-text"></i>
+              <span class="badge bg-success badge-number">3</span>
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages"
+            >
+              <li class="dropdown-header">
+                3 tin nhắn mới
+                <a href="#"
+                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
+                    >Xem tất cả</span
+                  ></a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+
+              <li class="message-item">
+                <a href="#">
+                  <img
+                    th:src="@{/admin-assets/img/messages-1.jpg}"
+                    alt=""
+                    class="rounded-circle"
+                  />
+                  <div>
+                    <h4>Maria Hudson</h4>
+                    <p>
+                      Velit asperiores et ducimus soluta repudiandae labore
+                      officia est ut...
+                    </p>
+                    <p>4 hrs. ago</p>
+                  </div>
+                </a>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+
+              <li class="dropdown-footer">
+                <a href="#">Tất cả tin nhắn</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown pe-3">
+            <a
+              class="nav-link nav-profile d-flex align-items-center pe-0"
+              href="#"
+              data-bs-toggle="dropdown"
+            >
+              <img
+                th:src="@{/admin-assets/img/profile-img.jpg}"
+                alt="Profile"
+                class="rounded-circle"
+              />
+
+              <span
+                class="d-none d-md-block dropdown-toggle ps-2"
+                th:text="${currentUser != null ? currentUser.fullName : 'Guest'}"
+              >
+                Guest
+              </span>
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
+            >
+              <li class="dropdown-header">
+                <h6
+                  th:text="${currentUser != null ? currentUser.fullName : 'Guest'}"
+                >
+                  Guest
+                </h6>
+                <span
+                  th:text="${currentUser != null ? currentUser.role : 'User'}"
+                  >Web Designer</span
+                >
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  th:href="@{/admin/users-profile}"
+                >
+                  <i class="bi bi-person"></i>
+                  <span>Thông tin tài khoản</span>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+
+              <li>
+                <a
+                  class="dropdown-item d-flex align-items-center"
+                  th:href="@{/logout}"
+                >
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Đăng xuất</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <aside id="sidebar" class="sidebar">
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin}">
+            <i class="bi bi-grid"></i>
+            <span>Bảng điều khiển</span>
+          </a>
+        </li>
+        <li class="nav-heading">Quản lý</li>
+
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/admin/categories}">
+            <i class="bi bi-menu-button-wide"></i>
+            <span>Danh mục dự án</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/tables-data}">
+            <i class="bi bi-layout-text-window-reverse"></i>
+            <span>Tất cả dự án</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/quotes-data}">
+            <i class="bi bi-menu-button-wide"></i>
+            <span>Yêu cầu báo giá</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            data-bs-target="#charts-nav"
+            data-bs-toggle="collapse"
+            href="#"
+          >
+            <i class="bi bi-bar-chart"></i><span>Thống kê</span
+            ><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul
+            id="charts-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a th:href="@{/admin/charts-chartjs}">
+                <i class="bi bi-circle"></i><span>Xem biểu đồ</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-heading">Trang khác</li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/users-profile}">
+            <i class="bi bi-person"></i>
+            <span>Thông tin cá nhân</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/pages-login}">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Đăng nhập</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/}">
+            <i class="bi bi-house-door"></i>
+            <span>Về Trang Chủ</span>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Quản lý Danh mục</h1>
+      </div>
+
+      <section class="section">
+        <div class="row">
+          <div class="col-12">
+            <div
+              th:if="${error}"
+              class="alert alert-danger alert-dismissible fade show"
+              role="alert"
+            >
+              <i class="bi bi-exclamation-octagon me-1"></i>
+              <span th:text="${error}"></span>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div
+              th:if="${message}"
+              class="alert alert-success alert-dismissible fade show"
+              role="alert"
+            >
+              <i class="bi bi-check-circle me-1"></i>
+              <span th:text="${message}"></span>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Thêm Danh mục</h5>
+                <form
+                  th:action="@{/admin/categories/save}"
+                  th:object="${category}"
+                  method="post"
+                >
+                  <input type="hidden" th:field="*{id}" />
+                  <div class="mb-3">
+                    <label class="form-label">Tên danh mục</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      th:field="*{name}"
+                      required
+                      placeholder="Ví dụ: Nhà phố..."
+                    />
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100">
+                    Lưu lại
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Danh sách hiện có</h5>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Tên Danh mục</th>
+                      <th class="text-center">Số dự án</th>
+                      <th>Hành động</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="cat : ${categories}">
+                      <td th:text="${cat.id}">1</td>
+                      <td th:text="${cat.name}">Tên</td>
+
+                      <td class="text-center">
+                        <button
+                          type="button"
+                          class="btn btn-sm btn-info text-white"
+                          data-bs-toggle="modal"
+                          th:data-bs-target="'#modalProjectList' + ${cat.id}"
+                        >
+                          <span
+                            th:text="${cat.projects != null ? cat.projects.size() : 0}"
+                            >0</span
+                          >
+                          dự án
+                          <i class="bi bi-eye ms-1"></i>
+                        </button>
+
+                        <div
+                          class="modal fade"
+                          th:id="'modalProjectList' + ${cat.id}"
+                          tabindex="-1"
+                        >
+                          <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">
+                                  Dự án thuộc danh mục:
+                                  <b th:text="${cat.name}"></b>
+                                </h5>
+                                <button
+                                  type="button"
+                                  class="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              <div class="modal-body text-start">
+                                <div
+                                  th:if="${cat.projects == null || cat.projects.isEmpty()}"
+                                  class="text-center text-muted"
+                                >
+                                  Chưa có dự án nào trong danh mục này.
+                                </div>
+                                <ul
+                                  th:if="${cat.projects != null && !cat.projects.isEmpty()}"
+                                  class="list-group"
+                                >
+                                  <li
+                                    class="list-group-item d-flex justify-content-between align-items-center"
+                                    th:each="proj : ${cat.projects}"
+                                  >
+                                    <span>
+                                      <strong th:text="${proj.title}"
+                                        >Tên dự án</strong
+                                      >
+                                      <br />
+                                      <small
+                                        class="text-muted"
+                                        th:text="'Khách hàng: ' + ${proj.client}"
+                                      ></small>
+                                    </span>
+                                    <span
+                                      class="badge bg-primary rounded-pill"
+                                      th:text="${proj.status}"
+                                      >Trạng thái</span
+                                    >
+                                  </li>
+                                </ul>
+                              </div>
+                              <div class="modal-footer">
+                                <button
+                                  type="button"
+                                  class="btn btn-secondary"
+                                  data-bs-dismiss="modal"
+                                >
+                                  Đóng
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <a
+                          th:href="@{/admin/categories/delete/{id}(id=${cat.id})}"
+                          class="btn btn-sm btn-danger"
+                          onclick="return confirm('Bạn có chắc muốn xóa?');"
+                        >
+                          <i class="bi bi-trash"></i> Xóa
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script
+      th:src="@{/admin-assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"
+    ></script>
+    <script th:src="@{/admin-assets/js/main.js}"></script>
+  </body>
+</html>

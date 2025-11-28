@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AI Dự Toán & Thiết Kế - FULLBD</title>
+
+    <link
+      th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+      rel="stylesheet"
+    />
+    <link th:href="@{/assets/css/main.css}" rel="stylesheet" />
+
+    <style>
+      .ai-card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+      .ai-header {
+        background: var(--accent-color);
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+      .price-tag {
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--accent-color);
+      }
+      .img-preview {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+      .img-preview:hover {
+        transform: scale(1.02);
+      }
+    </style>
+  </head>
+
+  <body class="starter-page-page">
+    <header id="header" class="header d-flex align-items-center fixed-top">
+      <div
+        class="container-fluid container-xl position-relative d-flex align-items-center"
+      >
+        <a th:href="@{/}" class="logo d-flex align-items-center me-auto">
+          <h1 class="sitename">FULLBD</h1>
+        </a>
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a th:href="@{/}">Trang chủ</a></li>
+          </ul>
+        </nav>
+        <a class="btn-getstarted" th:href="@{/quote}">Báo giá</a>
+      </div>
+    </header>
+
+    <main class="main">
+      <div
+        class="page-title dark-background"
+        style="
+          background-image: url('/assets/img/construction/showcase-2.webp');
+        "
+      >
+        <div class="container position-relative">
+          <h1>AI Dự Toán & Thiết Kế Nhanh</h1>
+          <p>
+            Nhập thông tin dự án, nhận ngay dự toán chi phí và gợi ý thiết kế
+            trong 3 giây.
+          </p>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="container">
+          <div class="row justify-content-center mb-5">
+            <div class="col-lg-8">
+              <div class="card ai-card">
+                <div class="ai-header">
+                  <h3 class="mb-0">
+                    <i class="bi bi-robot"></i> Nhập thông tin công trình
+                  </h3>
+                </div>
+                <div class="card-body p-4">
+                  <form
+                    th:action="@{/ai-design/generate}"
+                    th:object="${request}"
+                    method="post"
+                  >
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <label class="form-label">Diện tích đất (m2)</label>
+                        <input
+                          type="number"
+                          th:field="*{area}"
+                          class="form-control"
+                          required
+                          placeholder="Ví dụ: 100"
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Số tầng</label>
+                        <input
+                          type="number"
+                          th:field="*{floors}"
+                          class="form-control"
+                          required
+                          placeholder="Ví dụ: 3"
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Phong cách</label>
+                        <select th:field="*{style}" class="form-select">
+                          <option value="modern">Hiện đại</option>
+                          <option value="neo-classic">Tân cổ điển</option>
+                          <option value="classic">Cổ điển</option>
+                          <option value="indochine">Đông Dương</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Mức độ đầu tư</label>
+                        <select th:field="*{material}" class="form-select">
+                          <option value="standard">Cơ bản (Tiết kiệm)</option>
+                          <option value="good">Khá (Phổ biến)</option>
+                          <option value="luxury">Cao cấp (Sang trọng)</option>
+                        </select>
+                      </div>
+                      <div class="col-12">
+                        <label class="form-label"
+                          >Ngân sách dự kiến (VNĐ)</label
+                        >
+                        <input
+                          type="number"
+                          th:field="*{budget}"
+                          class="form-control"
+                          placeholder="Ví dụ: 2000000000"
+                        />
+                      </div>
+                      <div class="col-12 text-center mt-4">
+                        <button
+                          type="submit"
+                          class="btn btn-primary btn-lg w-50"
+                        >
+                          <i class="bi bi-magic"></i> Phân tích ngay
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            th:if="${result != null}"
+            class="row justify-content-center fade-in-up"
+          >
+            <div class="col-lg-12">
+              <h2 class="text-center mb-4 text-success fw-bold">
+                Kết quả Phân tích từ AI
+              </h2>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+              <div class="card ai-card h-100">
+                <div class="card-body p-4">
+                  <h4 class="card-title">1. Dự toán chi phí</h4>
+                  <hr />
+                  <ul class="list-group list-group-flush">
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center"
+                    >
+                      Xây dựng phần thô
+                      <span
+                        class="fw-bold"
+                        th:text="${#numbers.formatDecimal(result.roughCost, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+                      ></span>
+                    </li>
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center"
+                    >
+                      Hoàn thiện
+                      <span
+                        class="fw-bold"
+                        th:text="${#numbers.formatDecimal(result.finishCost, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+                      ></span>
+                    </li>
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center"
+                    >
+                      Nội thất cơ bản
+                      <span
+                        class="fw-bold"
+                        th:text="${#numbers.formatDecimal(result.furnitureCost, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+                      ></span>
+                    </li>
+                    <li
+                      class="list-group-item active d-flex justify-content-between align-items-center mt-3"
+                    >
+                      TỔNG CỘNG
+                      <span
+                        class="fw-bold fs-5"
+                        th:text="${#numbers.formatDecimal(result.totalCost, 0, 'COMMA', 0, 'POINT')} + ' đ'"
+                      ></span>
+                    </li>
+                  </ul>
+
+                  <div class="alert alert-info mt-3">
+                    <i class="bi bi-lightbulb"></i> <strong>Lời khuyên:</strong
+                    ><br />
+                    <span th:text="${result.advice}"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-8 mb-4">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="card ai-card">
+                    <div class="card-body p-3 text-center">
+                      <h5>2. Bố trí mặt bằng (2D)</h5>
+                      <img
+                        th:src="@{${result.layout2D}}"
+                        class="img-preview"
+                        alt="Layout 2D"
+                      />
+                      <p class="text-muted small">
+                        Gợi ý bố trí công năng tối ưu
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card ai-card">
+                    <div class="card-body p-3 text-center">
+                      <h5>3. Phối cảnh ngoại thất (3D)</h5>
+                      <img
+                        th:src="@{${result.perspective3D}}"
+                        class="img-preview"
+                        alt="Perspective 3D"
+                      />
+                      <p class="text-muted small">
+                        Hình dung phong cách kiến trúc
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center mt-4">
+                <a
+                  th:href="@{/contact}"
+                  class="btn btn-success btn-lg pulse-button"
+                >
+                  <i class="bi bi-telephone-inbound"></i> Yêu cầu Tư vấn Chi
+                  tiết Dựa trên PA này
+                </a>
+                <p class="mt-2 text-muted fst-italic">
+                  * Số liệu và hình ảnh chỉ mang tính chất tham khảo sơ bộ.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="footer" class="footer dark-background">
+      <div class="container text-center">
+        <p>© <span>FULLBD</span>. All Rights Reserved</p>
+      </div>
+    </footer>
+
+    <script
+      th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"
+    ></script>
+    <script th:src="@{/assets/js/main.js}"></script>
+
+    <style>
+      .fade-in-up {
+        animation: fadeInUp 0.8s ease-out;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .pulse-button {
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(25, 135, 84, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(25, 135, 84, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(25, 135, 84, 0);
+        }
+      }
+    </style>
+  </body>
+</html>

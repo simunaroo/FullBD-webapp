@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Lỗi - Có sự cố xảy ra</title>
+
+    <link
+      th:href="@{/admin-assets/vendor/bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/admin-assets/vendor/bootstrap-icons/bootstrap-icons.css}"
+      rel="stylesheet"
+    />
+    <link th:href="@{/admin-assets/css/style.css}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <main>
+      <div class="container">
+        <section
+          class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center"
+        >
+          <h1 th:text="${status}">404</h1>
+
+          <h2 th:text="${error}">Không tìm thấy trang</h2>
+
+          <p class="text-center text-muted" th:text="${message}">
+            Đường dẫn bạn truy cập không tồn tại hoặc đã bị xóa.
+          </p>
+
+          <a class="btn" th:href="@{/admin}">Quay về Trang chủ Admin</a>
+
+          <img
+            th:src="@{/admin-assets/img/not-found.svg}"
+            class="img-fluid py-5"
+            alt="Error Image"
+            style="max-width: 50%"
+          />
+        </section>
+      </div>
+    </main>
+
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <script
+      th:src="@{/admin-assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"
+    ></script>
+    <script th:src="@{/admin-assets/js/main.js}"></script>
+  </body>
+</html>
