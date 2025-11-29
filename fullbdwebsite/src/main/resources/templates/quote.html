@@ -422,5 +422,40 @@
     <script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
     <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
     <script th:src="@{/assets/js/main.js}"></script>
+    <!-- Kiểm tra tính hợp lý dữ liệu -->
+    <script>
+      document
+        .querySelector("form")
+        .addEventListener("submit", function (event) {
+          let isValid = true;
+
+          // 1. Kiểm tra Họ tên
+          const name = document.getElementById("fullname").value;
+          if (name.length < 2) {
+            alert("Vui lòng nhập họ tên đầy đủ!");
+            isValid = false;
+          }
+
+          // 2. Kiểm tra Số điện thoại (Phải là số, 10 chữ số)
+          const phone = document.getElementById("phone").value;
+          const phoneRegex = /^[0-9]{10}$/;
+          if (!phoneRegex.test(phone)) {
+            alert("Số điện thoại không hợp lệ (phải có 10 chữ số)!");
+            isValid = false;
+          }
+
+          // 3. Kiểm tra Loại dự án
+          const type = document.getElementById("project-type").value;
+          if (type === "") {
+            alert("Vui lòng chọn loại dự án!");
+            isValid = false;
+          }
+
+          // Ngăn không cho gửi nếu dữ liệu sai
+          if (!isValid) {
+            event.preventDefault();
+          }
+        });
+    </script>
   </body>
 </html>

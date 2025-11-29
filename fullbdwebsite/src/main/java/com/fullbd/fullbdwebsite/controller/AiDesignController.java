@@ -2,6 +2,8 @@ package com.fullbd.fullbdwebsite.controller;
 
 import com.fullbd.fullbdwebsite.dto.AiDesignRequest;
 import com.fullbd.fullbdwebsite.dto.AiDesignResult;
+import com.fullbd.fullbdwebsite.model.AiUsageLog;
+import com.fullbd.fullbdwebsite.repository.AiUsageLogRepository;
 import com.fullbd.fullbdwebsite.service.AiEstimationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,9 @@ public class AiDesignController {
     @Autowired
     private AiEstimationService aiEstimationService;
 
+    @Autowired
+    private AiUsageLogRepository aiUsageLogRepository;
+
     @GetMapping("/ai-design")
     public String showForm(Model model) {
         model.addAttribute("request", new AiDesignRequest());
@@ -27,6 +32,7 @@ public class AiDesignController {
         AiDesignResult result = aiEstimationService.calculate(request);
         model.addAttribute("result", result);
         model.addAttribute("request", request); // Gửi lại request để hiển thị lại form nếu cần
+        aiUsageLogRepository.save(new AiUsageLog());
         return "ai-design"; // Trả về cùng 1 trang nhưng có thêm dữ liệu result
     }
 }

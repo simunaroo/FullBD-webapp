@@ -85,81 +85,7 @@
               <i class="bi bi-search"></i>
             </a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-              <i class="bi bi-bell"></i>
-              <span class="badge bg-primary badge-number">4</span>
-            </a>
-            <ul
-              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications"
-            >
-              <li class="dropdown-header">
-                Bạn có 4 thông báo mới
-                <a href="#"
-                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
-                    >Xem tất cả</span
-                  ></a
-                >
-              </li>
-              <li><hr class="dropdown-divider" /></li>
 
-              <li class="notification-item">
-                <i class="bi bi-exclamation-circle text-warning"></i>
-                <div>
-                  <h4>Lorem Ipsum</h4>
-                  <p>Quae dolorem earum veritatis oditseno</p>
-                  <p>30 min. ago</p>
-                </div>
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-
-              <li class="dropdown-footer">
-                <a href="#">Tất cả thông báo</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-              <i class="bi bi-chat-left-text"></i>
-              <span class="badge bg-success badge-number">3</span>
-            </a>
-            <ul
-              class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages"
-            >
-              <li class="dropdown-header">
-                3 tin nhắn mới
-                <a href="#"
-                  ><span class="badge rounded-pill bg-primary p-2 ms-2"
-                    >Xem tất cả</span
-                  ></a
-                >
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-
-              <li class="message-item">
-                <a href="#">
-                  <img
-                    th:src="@{/admin-assets/img/messages-1.jpg}"
-                    alt=""
-                    class="rounded-circle"
-                  />
-                  <div>
-                    <h4>Maria Hudson</h4>
-                    <p>
-                      Velit asperiores et ducimus soluta repudiandae labore
-                      officia est ut...
-                    </p>
-                    <p>4 hrs. ago</p>
-                  </div>
-                </a>
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-
-              <li class="dropdown-footer">
-                <a href="#">Tất cả tin nhắn</a>
-              </li>
-            </ul>
-          </li>
           <li class="nav-item dropdown pe-3">
             <a
               class="nav-link nav-profile d-flex align-items-center pe-0"
@@ -284,12 +210,6 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link collapsed" th:href="@{/admin/pages-register}">
-            <i class="bi bi-card-list"></i>
-            <span>Đăng kí</span>
-          </a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link collapsed" th:href="@{/admin/pages-login}">
             <i class="bi bi-box-arrow-in-right"></i>
             <span>Đăng nhập</span>
@@ -320,6 +240,7 @@
                   th:object="${newProject}"
                   method="post"
                   class="row g-3"
+                  onsubmit="return validateProjectForm()"
                 >
                   <div class="col-md-4">
                     <input
@@ -453,5 +374,35 @@
     ></script>
 
     <script th:src="@{/admin-assets/js/main.js}"></script>
+    <script>
+      function validateProjectForm() {
+        // Lấy giá trị từ form
+        let title = document.querySelector('input[name="title"]').value;
+        let client = document.querySelector('input[name="client"]').value;
+        let category = document.querySelector('select[name="category"]').value;
+
+        // 1. Kiểm tra tên dự án không được để trống
+        if (title.trim() === "") {
+          alert("Lỗi: Tên dự án không được để trống!");
+          return false; // Chặn submit
+        }
+
+        // 2. Kiểm tra tên chủ đầu tư
+        if (client.trim().length < 3) {
+          alert("Lỗi: Tên chủ đầu tư phải dài hơn 3 ký tự!");
+          return false;
+        }
+
+        // 3. Kiểm tra đã chọn danh mục chưa
+        if (category === "" || category === null) {
+          alert("Lỗi: Vui lòng chọn một danh mục cho dự án!");
+          return false;
+        }
+
+        // Nếu mọi thứ OK
+        alert("Dữ liệu hợp lệ! Đang thêm dự án...");
+        return true; // Cho phép submit
+      }
+    </script>
   </body>
 </html>
