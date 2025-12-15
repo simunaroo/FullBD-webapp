@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-
-    <title>Pages / Contact - NiceAdmin Bootstrap Template</title>
+    <title>Thư viện ảnh dự án</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
@@ -51,13 +50,12 @@
 
     <link th:href="@{/admin-assets/css/style.css}" rel="stylesheet" />
   </head>
-
   <body>
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
         <a th:href="@{/admin}" class="logo d-flex align-items-center">
           <img th:src="@{/admin-assets/img/logo.png}" alt="" />
-          <span class="d-none d-lg-block">Admin</span>
+          <span class="d-none d-lg-block">FullBD Admin</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
       </div>
@@ -158,10 +156,61 @@
             <span>Bảng điều khiển</span>
           </a>
         </li>
+        <li class="nav-heading">Quản lý</li>
+
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/admin/pages-contact}">
-            <i class="bi bi-envelope"></i>
-            <span>Liên hệ</span>
+          <a class="nav-link collapsed" th:href="@{/admin/categories}">
+            <i class="bi bi-menu-button-wide"></i>
+            <span>Danh mục dự án</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/admin/tables-data}">
+            <i class="bi bi-layout-text-window-reverse"></i>
+            <span>Tất cả dự án</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/quotes-data}">
+            <i class="bi bi-menu-button-wide"></i>
+            <span>Yêu cầu báo giá</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link collapsed"
+            data-bs-target="#charts-nav"
+            data-bs-toggle="collapse"
+            href="#"
+          >
+            <i class="bi bi-bar-chart"></i><span>Thống kê</span
+            ><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul
+            id="charts-nav"
+            class="nav-content collapse"
+            data-bs-parent="#sidebar-nav"
+          >
+            <li>
+              <a th:href="@{/admin/charts-chartjs}">
+                <i class="bi bi-circle"></i><span>Xem biểu đồ</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-heading">Trang khác</li>
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/users-profile}">
+            <i class="bi bi-person"></i>
+            <span>Thông tin cá nhân</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link collapsed" th:href="@{/admin/pages-login}">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>Đăng nhập</span>
           </a>
         </li>
 
@@ -175,125 +224,111 @@
     </aside>
     <main id="main" class="main">
       <div class="pagetitle">
-        <h1>Contact</h1>
+        <h1>Thư viện ảnh: <span th:text="${project.title}"></span></h1>
         <nav>
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a th:href="@{/admin}">Home</a></li>
-            <li class="breadcrumb-item">Pages</li>
-            <li class="breadcrumb-item active">Contact</li>
+            <li class="breadcrumb-item">
+              <a th:href="@{/admin/tables-data}">Dự án</a>
+            </li>
+            <li class="breadcrumb-item active">Quản lý ảnh</li>
           </ol>
         </nav>
       </div>
-      <section class="section contact">
-        <div class="row gy-4">
-          <div class="col-xl-6">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="info-box card">
-                  <i class="bi bi-geo-alt"></i>
-                  <h3>Address</h3>
-                  <p>A108 Adam Street,<br />New York, NY 535022</p>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="info-box card">
-                  <i class="bi bi-telephone"></i>
-                  <h3>Call Us</h3>
-                  <p>+1 5589 55488 55<br />+1 6678 254445 41</p>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="info-box card">
-                  <i class="bi bi-envelope"></i>
-                  <h3>Email Us</h3>
-                  <p>info@example.com<br />contact@example.com</p>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="info-box card">
-                  <i class="bi bi-clock"></i>
-                  <h3>Open Hours</h3>
-                  <p>Monday - Friday<br />9:00AM - 05:00PM</p>
-                </div>
+
+      <section class="section">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Tải ảnh lên (Chọn nhiều ảnh cùng lúc)
+                </h5>
+
+                <div
+                  th:if="${successMessage}"
+                  class="alert alert-success"
+                  th:text="${successMessage}"
+                ></div>
+                <div
+                  th:if="${errorMessage}"
+                  class="alert alert-danger"
+                  th:text="${errorMessage}"
+                ></div>
+
+                <form
+                  th:action="@{/admin/projects/{id}/gallery/upload(id=${project.id})}"
+                  method="post"
+                  enctype="multipart/form-data"
+                  class="row g-3"
+                >
+                  <div class="col-md-10">
+                    <input
+                      class="form-control"
+                      type="file"
+                      name="files"
+                      multiple
+                      accept="image/*"
+                      required
+                    />
+                  </div>
+                  <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                      <i class="bi bi-cloud-upload"></i> Tải lên
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
 
-          <div class="col-xl-6">
-            <div class="card p-4">
-              <form action="#" method="post" class="php-email-form">
-                <div class="row gy-4">
-                  <div class="col-md-6">
-                    <input
-                      type="text"
-                      name="name"
-                      class="form-control"
-                      placeholder="Your Name"
-                      required
-                    />
-                  </div>
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Ảnh đã tải lên (<span th:text="${images.size()}"></span>)
+                </h5>
 
-                  <div class="col-md-6">
-                    <input
-                      type="email"
-                      class="form-control"
-                      name="email"
-                      placeholder="Your Email"
-                      required
-                    />
-                  </div>
+                <div class="row g-3">
+                  <div class="col-md-3 col-6" th:each="img : ${images}">
+                    <div class="card h-100 shadow-sm">
+                      <img
+                        th:src="@{${img.imageUrl}}"
+                        class="card-img-top"
+                        style="height: 150px; object-fit: cover"
+                        alt="Project Image"
+                      />
 
-                  <div class="col-md-12">
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="subject"
-                      placeholder="Subject"
-                      required
-                    />
-                  </div>
-
-                  <div class="col-md-12">
-                    <textarea
-                      class="form-control"
-                      name="message"
-                      rows="6"
-                      placeholder="Message"
-                      required
-                    ></textarea>
-                  </div>
-
-                  <div class="col-md-12 text-center">
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">
-                      Your message has been sent. Thank you!
+                      <div class="card-body p-2 text-center">
+                        <a
+                          th:href="@{/admin/projects/gallery/delete/{imgId}(imgId=${img.id})}"
+                          class="btn btn-danger btn-sm"
+                          onclick="return confirm('Xóa ảnh này?');"
+                        >
+                          <i class="bi bi-trash"></i> Xóa
+                        </a>
+                      </div>
                     </div>
+                  </div>
 
-                    <button type="submit">Send Message</button>
+                  <div
+                    th:if="${images.isEmpty()}"
+                    class="col-12 text-center text-muted py-5"
+                  >
+                    Chưa có ảnh nào. Hãy tải lên ngay!
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
       </section>
     </main>
-    <footer id="footer" class="footer">
-      <div class="copyright">
-        &copy; Copyright <strong><span>NiceAdmin</span></strong
-        >. All Rights Reserved
-      </div>
-      <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </footer>
+
     <a
       href="#"
       class="back-to-top d-flex align-items-center justify-content-center"
-    >
-      <i class="bi bi-arrow-up-short"></i>
-    </a>
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
 
     <script
       th:src="@{/admin-assets/vendor/apexcharts/apexcharts.min.js}"

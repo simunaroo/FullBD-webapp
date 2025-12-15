@@ -45,6 +45,172 @@
       .img-preview:hover {
         transform: scale(1.02);
       }
+      /* Chatbox Styles */
+      .chat-box-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 350px;
+        height: 450px;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+        display: none; /* Ẩn mặc định */
+        flex-direction: column;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+        animation: slideIn 0.5s;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateY(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .chat-header {
+        background: var(--accent-color); /* Màu cam chủ đạo */
+        color: white;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .online-indicator {
+        width: 10px;
+        height: 10px;
+        background: #2ecc71;
+        border-radius: 50%;
+        box-shadow: 0 0 5px #2ecc71;
+      }
+
+      .btn-close-chat {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      .chat-body {
+        flex: 1;
+        padding: 15px;
+        overflow-y: auto;
+        background: #f8f9fa;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .message {
+        max-width: 80%;
+        padding: 10px 15px;
+        border-radius: 15px;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        animation: fadeIn 0.3s;
+      }
+
+      .bot-message {
+        background: #e9ecef;
+        align-self: flex-start;
+        border-bottom-left-radius: 2px;
+      }
+
+      .user-message {
+        background: var(--accent-color);
+        color: white;
+        align-self: flex-end;
+        border-bottom-right-radius: 2px;
+      }
+
+      .project-info-card {
+        background: #fff;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+      }
+
+      .chat-footer {
+        padding: 10px;
+        border-top: 1px solid #eee;
+        display: flex;
+        gap: 10px;
+        background: #fff;
+      }
+
+      #chatInput {
+        flex: 1;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        padding: 8px 15px;
+        outline: none;
+      }
+
+      .btn-send {
+        background: var(--accent-color);
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .btn-send:hover {
+        background: #d15600;
+      }
+      /* Style cho nút Chat nổi */
+      .btn-floating-chat {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--accent-color); /* Màu cam của web */
+        color: white;
+        border: none;
+        font-size: 24px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        z-index: 9990; /* Thấp hơn modal nhưng cao hơn nội dung */
+        transition: transform 0.3s, background 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .btn-floating-chat:hover {
+        background: #d15600; /* Màu đậm hơn khi di chuột */
+        transform: scale(1.1) rotate(10deg);
+      }
+
+      /* Hiệu ứng sóng tỏa ra (Pulse) để gây chú ý */
+      .pulse-animation {
+        animation: pulse-orange 2s infinite;
+      }
+
+      @keyframes pulse-orange {
+        0% {
+          box-shadow: 0 0 0 0 rgba(233, 99, 8, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 15px rgba(233, 99, 8, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(233, 99, 8, 0);
+        }
+      }
     </style>
   </head>
 
@@ -53,15 +219,40 @@
       <div
         class="container-fluid container-xl position-relative d-flex align-items-center"
       >
-        <a th:href="@{/}" class="logo d-flex align-items-center me-auto">
-          <h1 class="sitename">FULLBD</h1>
+        <a th:href="@{/index}" class="logo d-flex align-items-center me-auto">
+          <h1 class="sitename">Xây Dựng FULLBD</h1>
         </a>
+
         <nav id="navmenu" class="navmenu">
           <ul>
-            <li><a th:href="@{/}">Trang chủ</a></li>
+            <li><a th:href="@{/index}">Trang chủ</a></li>
+            <li><a th:href="@{/about}">Giới thiệu</a></li>
+            <li><a th:href="@{/services}">Danh mục</a></li>
+            <li><a th:href="@{/projects}">Dự án</a></li>
+            <li><a th:href="@{/team}">Đội ngũ</a></li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>Trang khác</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i>
+              </a>
+              <ul>
+                <li><a th:href="@{/service-details}">Chi tiết Dịch vụ</a></li>
+                <li><a th:href="@{/quote}">Báo giá</a></li>
+                <li>
+                  <a th:href="@{/ai-design}" class="active"
+                    >AI Dự Toán & Thiết Kế Nhanh</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li><a th:href="@{/contact}">Liên hệ</a></li>
           </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
-        <a class="btn-getstarted" th:href="@{/quote}">Báo giá</a>
+
+        <a class="btn-getstarted d-none d-sm-block" th:href="@{/quote}"
+          >Yêu Cầu Báo Giá</a
+        >
       </div>
     </header>
 
@@ -259,13 +450,18 @@
               </div>
 
               <div class="text-center mt-4">
-                <a
-                  th:href="@{/contact}"
+                <button
+                  type="button"
                   class="btn btn-success btn-lg pulse-button"
+                  onclick="openContactModal(this)"
+                  th:data-style="${request.style}"
+                  th:data-floors="${request.floors}"
+                  th:data-area="${request.area}"
+                  th:data-cost="${#numbers.formatDecimal(result.totalCost, 0, 'COMMA', 0, 'POINT') + ' VNĐ'}"
                 >
-                  <i class="bi bi-telephone-inbound"></i> Yêu cầu Tư vấn Chi
-                  tiết Dựa trên PA này
-                </a>
+                  <i class="bi bi-chat-dots-fill"></i> Yêu cầu Tư vấn Chi tiết &
+                  Chat Ngay
+                </button>
                 <p class="mt-2 text-muted fst-italic">
                   * Số liệu và hình ảnh chỉ mang tính chất tham khảo sơ bộ.
                 </p>
@@ -316,5 +512,304 @@
         }
       }
     </style>
+    <div
+      class="modal fade"
+      id="customerInfoModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-success text-white">
+            <h5 class="modal-title">
+              <i class="bi bi-person-lines-fill"></i> Thông tin liên hệ
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p class="text-muted small">
+              Vui lòng nhập thông tin để kết nối với chuyên gia tư vấn.
+            </p>
+            <form id="startChatForm">
+              <div class="mb-3">
+                <label class="form-label"
+                  >Họ và Tên <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  id="chatName"
+                  class="form-control"
+                  placeholder="Nguyễn Văn A"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label"
+                  >Số điện thoại <span class="text-danger">*</span></label
+                >
+                <input
+                  type="tel"
+                  id="chatPhone"
+                  class="form-control"
+                  placeholder="09xxxxxxxx"
+                  required
+                />
+                <div
+                  id="phoneError"
+                  class="text-danger small mt-1"
+                  style="display: none"
+                >
+                  Số điện thoại không hợp lệ!
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Hủy
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              onclick="validateAndStartChat()"
+            >
+              Bắt đầu Chat <i class="bi bi-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="liveChatBox" class="chat-box-container">
+      <div class="chat-header">
+        <div class="d-flex align-items-center">
+          <div class="online-indicator"></div>
+          <span class="fw-bold ms-2">Tư vấn viên FULLBD</span>
+        </div>
+        <button class="btn-close-chat" onclick="closeChat()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <div class="chat-body" id="chatBody">
+        <div class="message bot-message">
+          Xin chào! Tôi là trợ lý ảo của FULLBD. Tôi có thể giúp gì cho bạn?
+        </div>
+      </div>
+
+      <div class="chat-footer">
+        <input
+          type="text"
+          id="chatInput"
+          placeholder="Nhập tin nhắn..."
+          onkeypress="handleEnter(event)"
+        />
+        <button class="btn-send" onclick="sendMessage()">
+          <i class="bi bi-send-fill"></i>
+        </button>
+      </div>
+    </div>
+    <script>
+      // Biến lưu trữ dữ liệu dự án tạm thời
+      let currentProjectData = {};
+
+      // --- 1. XỬ LÝ MỞ MODAL HOẶC CHAT NGAY ---
+      function openContactModal(button) {
+        // Lấy dữ liệu dự án từ nút bấm
+        currentProjectData = {
+          style: button.getAttribute("data-style"),
+          floors: button.getAttribute("data-floors"),
+          area: button.getAttribute("data-area"),
+          cost: button.getAttribute("data-cost"),
+        };
+
+        // KIỂM TRA LOCAL STORAGE
+        const savedName = localStorage.getItem("fullbd_client_name");
+        const savedPhone = localStorage.getItem("fullbd_client_phone");
+
+        if (savedName && savedPhone) {
+          // A. Nếu đã có thông tin -> Mở Chat ngay (Bỏ qua Modal)
+          openChatBox();
+          sendAutoProjectInfo(savedName, savedPhone);
+        } else {
+          // B. Nếu chưa có -> Mở Modal để nhập
+          var myModal = new bootstrap.Modal(
+            document.getElementById("customerInfoModal")
+          );
+          myModal.show();
+        }
+      }
+
+      // --- 2. VALIDATE & LƯU THÔNG TIN ---
+      function validateAndStartChat() {
+        const name = document.getElementById("chatName").value.trim();
+        const phone = document.getElementById("chatPhone").value.trim();
+        const phoneError = document.getElementById("phoneError");
+
+        if (name === "") {
+          alert("Vui lòng nhập họ tên!");
+          return;
+        }
+
+        const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
+        if (!phoneRegex.test(phone)) {
+          phoneError.style.display = "block";
+          return;
+        } else {
+          phoneError.style.display = "none";
+        }
+
+        // LƯU VÀO LOCAL STORAGE (Để lần sau không phải nhập lại)
+        localStorage.setItem("fullbd_client_name", name);
+        localStorage.setItem("fullbd_client_phone", phone);
+
+        // Ẩn Modal
+        const modalEl = document.getElementById("customerInfoModal");
+        const modalInstance = bootstrap.Modal.getInstance(modalEl);
+        modalInstance.hide();
+
+        // Mở Chat
+        openChatBox();
+        sendAutoProjectInfo(name, phone);
+      }
+
+      // --- 3. CÁC HÀM HỖ TRỢ CHAT ---
+
+      function openChatBox() {
+        document.getElementById("liveChatBox").style.display = "flex";
+        // Nếu ô chat đang trống, hiển thị lời chào mặc định
+        const chatBody = document.getElementById("chatBody");
+        if (chatBody.children.length <= 1) {
+          // Chỉ có 1 tin nhắn mặc định
+          // Có thể thêm logic reset chat tại đây nếu muốn
+        }
+      }
+
+      function sendAutoProjectInfo(name, phone) {
+        const chatBody = document.getElementById("chatBody");
+
+        // Hiển thị tin nhắn từ phía Khách hàng
+        const userMsg = `Chào bạn, tôi là ${name} (${phone}).`;
+        appendMessage(userMsg, "user-message");
+
+        // Card thông tin dự án
+        const infoHtml = `
+            <div class="project-info-card">
+                <strong><i class="bi bi-info-circle"></i> THÔNG TIN PHƯƠNG ÁN:</strong><br>
+                - Phong cách: ${currentProjectData.style}<br>
+                - Quy mô: ${currentProjectData.floors} tầng, ${currentProjectData.area} m2<br>
+                - Dự toán: <span class="text-danger fw-bold">${currentProjectData.cost}</span>
+                <hr style="margin: 5px 0;">
+                <small><a href="#" onclick="resetUserInfo(); return false;" class="text-primary">Sai thông tin cá nhân? Đổi lại</a></small>
+            </div>
+        `;
+
+        setTimeout(() => {
+          const div = document.createElement("div");
+          div.className = "message user-message";
+          div.style.background = "#fff";
+          div.style.color = "#333";
+          div.innerHTML = infoHtml;
+          chatBody.appendChild(div);
+          scrollToBottom();
+
+          setTimeout(() => {
+            appendMessage(
+              `FULLBD đã nhận thông tin. Chuyên gia đang phân tích phương án này cho anh/chị ${name}. Vui lòng đợi giây lát...`,
+              "bot-message"
+            );
+          }, 1500);
+        }, 300);
+      }
+
+      // --- 4. HÀM RESET THÔNG TIN (Nút nhỏ trong thẻ thông tin) ---
+      function resetUserInfo() {
+        if (
+          confirm(
+            "Bạn có muốn xóa thông tin đã lưu và nhập lại số điện thoại mới không?"
+          )
+        ) {
+          localStorage.removeItem("fullbd_client_name");
+          localStorage.removeItem("fullbd_client_phone");
+          closeChat();
+
+          // Mở lại modal nhập liệu
+          // Cần delay nhỏ để UI đóng chat xong
+          setTimeout(() => {
+            var myModal = new bootstrap.Modal(
+              document.getElementById("customerInfoModal")
+            );
+            myModal.show();
+          }, 500);
+        }
+      }
+
+      // --- CÁC HÀM CƠ BẢN CŨ ---
+      function appendMessage(text, className) {
+        const chatBody = document.getElementById("chatBody");
+        const div = document.createElement("div");
+        div.className = `message ${className}`;
+        div.innerText = text;
+        chatBody.appendChild(div);
+        scrollToBottom();
+      }
+
+      function sendMessage() {
+        const input = document.getElementById("chatInput");
+        const text = input.value.trim();
+        if (text !== "") {
+          appendMessage(text, "user-message");
+          input.value = "";
+          setTimeout(() => {
+            appendMessage("Dạ, em đã nhận được tin nhắn.", "bot-message");
+          }, 1000);
+        }
+      }
+
+      function handleEnter(e) {
+        if (e.key === "Enter") sendMessage();
+      }
+
+      function closeChat() {
+        document.getElementById("liveChatBox").style.display = "none";
+        // Tùy chọn: Xóa nội dung chat cũ để lần sau mở lại sạch sẽ hơn
+        // document.getElementById('chatBody').innerHTML = '<div class="message bot-message">Xin chào! Tôi là trợ lý ảo của FULLBD.</div>';
+      }
+
+      function scrollToBottom() {
+        const chatBody = document.getElementById("chatBody");
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }
+    </script>
+    <button
+      type="button"
+      class="btn-floating-chat pulse-animation"
+      onclick="openContactModal(this)"
+      th:if="${result != null}"
+      th:data-style="${request.style}"
+      th:data-floors="${request.floors}"
+      th:data-area="${request.area}"
+      th:data-cost="${#numbers.formatDecimal(result.totalCost, 0, 'COMMA', 0, 'POINT') + ' VNĐ'}"
+    >
+      <i class="bi bi-chat-dots-fill"></i>
+    </button>
+
+    <button
+      type="button"
+      class="btn-floating-chat"
+      onclick="document.getElementById('liveChatBox').style.display='flex'"
+      th:if="${result == null}"
+    >
+      <i class="bi bi-chat-dots-fill"></i>
+    </button>
   </body>
 </html>
