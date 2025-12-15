@@ -8,6 +8,8 @@ import java.util.List;
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
+    boolean existsByTitle(String title);
+
     List<Project> findByCategoryId(Long categoryId);
 
     @Query("SELECT p.category.name, COUNT(p) FROM Project p GROUP BY p.category.name")

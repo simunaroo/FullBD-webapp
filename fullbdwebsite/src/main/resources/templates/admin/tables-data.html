@@ -234,65 +234,130 @@
           <div class="col-lg-12">
             <div class="card mb-4">
               <div class="card-body">
-                <h5 class="card-title">Thêm Dự Án Mới</h5>
+                <div
+                  class="d-flex justify-content-between align-items-center mt-3 mb-3"
+                >
+                  <h5 class="card-title m-0 p-0">Thêm Dự Án Mới</h5>
+
+                  <form
+                    th:action="@{/admin/projects/import}"
+                    method="post"
+                    enctype="multipart/form-data"
+                    id="importForm"
+                  >
+                    <input
+                      type="file"
+                      name="file"
+                      id="excelFile"
+                      accept=".xlsx, .xls"
+                      style="display: none"
+                      onchange="document.getElementById('importForm').submit()"
+                    />
+
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      onclick="document.getElementById('excelFile').click()"
+                    >
+                      <i class="bi bi-file-earmark-spreadsheet me-1"></i> Thêm
+                      tự động (Excel)
+                    </button>
+                  </form>
+                </div>
+
                 <form
                   th:action="@{/admin/projects/save}"
                   th:object="${newProject}"
                   method="post"
-                  class="row g-3"
-                  onsubmit="return validateProjectForm()"
+                  id="projectForm"
                 >
-                  <div class="col-md-4">
+                  <input type="hidden" th:field="*{id}" id="projectId" />
+
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label class="form-label">Tên dự án</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        th:field="*{title}"
+                        id="projectTitle"
+                        placeholder="Tên dự án"
+                        required
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Chủ đầu tư</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        th:field="*{client}"
+                        id="projectClient"
+                        placeholder="Chủ đầu tư"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label class="form-label">Danh mục</label>
+                      <select
+                        th:field="*{category}"
+                        class="form-select"
+                        id="projectCategory"
+                      >
+                        <option value="">-- Chọn danh mục --</option>
+                        <option
+                          th:each="cat : ${categories}"
+                          th:value="${cat.id}"
+                          th:text="${cat.name}"
+                        ></option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Trạng thái</label>
+                      <select
+                        th:field="*{status}"
+                        class="form-select"
+                        id="projectStatus"
+                      >
+                        <option value="Sắp triển khai">Sắp triển khai</option>
+                        <option value="Đang thi công">Đang thi công</option>
+                        <option value="Hoàn thành">Hoàn thành</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Link ảnh</label>
                     <input
                       type="text"
-                      th:field="*{title}"
                       class="form-control"
-                      placeholder="Tên dự án"
-                      required
-                    />
-                  </div>
-                  <div class="col-md-4">
-                    <input
-                      type="text"
-                      th:field="*{client}"
-                      class="form-control"
-                      placeholder="Chủ đầu tư"
-                    />
-                  </div>
-                  <div class="col-md-4">
-                    <select th:field="*{category}" class="form-select">
-                      <option
-                        th:each="cat : ${categories}"
-                        th:value="${cat.id}"
-                        th:text="${cat.name}"
-                      ></option>
-                    </select>
-                  </div>
-                  <div class="col-md-6">
-                    <input
-                      type="text"
                       th:field="*{image}"
-                      class="form-control"
+                      id="projectImage"
                       placeholder="Link ảnh (Ví dụ: /assets/img/project-1.jpg)"
                     />
                   </div>
-                  <div class="col-md-6">
-                    <select th:field="*{status}" class="form-select">
-                      <option value="Đang thi công">Đang thi công</option>
-                      <option value="Hoàn thành">Hoàn thành</option>
-                    </select>
-                  </div>
-                  <div class="col-12">
+
+                  <div class="mb-3">
+                    <label class="form-label">Mô tả chi tiết</label>
                     <textarea
-                      th:field="*{description}"
                       class="form-control"
-                      placeholder="Mô tả chi tiết"
-                      rows="2"
+                      th:field="*{description}"
+                      id="projectDesc"
+                      rows="3"
                     ></textarea>
                   </div>
-                  <div class="col-12">
+
+                  <div class="d-flex gap-2">
                     <button type="submit" class="btn btn-primary">
-                      Thêm Dự Án
+                      Lưu Dự Án
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      onclick="resetForm()"
+                    >
+                      Hủy / Nhập mới
                     </button>
                   </div>
                 </form>
@@ -332,12 +397,33 @@
                         >
                       </td>
                       <td>
+                        <button
+                          type="button"
+                          class="btn btn-warning btn-sm"
+                          th:attr="data-id=${project.id}, 
+                 data-title=${project.title}, 
+                 data-client=${project.client}, 
+                 data-category=${project.category != null ? project.category.id : ''}, 
+                 data-status=${project.status}, 
+                 data-image=${project.image}, 
+                 data-desc=${project.description}"
+                          onclick="editProject(this)"
+                        >
+                          <i class="bi bi-pencil-square"></i>
+                        </button>
                         <a
                           th:href="@{/admin/projects/delete/{id}(id=${project.id})}"
                           class="btn btn-danger btn-sm"
                           onclick="return confirm('Bạn chắc chắn muốn xóa?');"
                         >
                           <i class="bi bi-trash"></i>
+                        </a>
+                        <a
+                          th:href="@{/admin/projects/{id}/gallery(id=${project.id})}"
+                          class="btn btn-info btn-sm text-white"
+                          title="Quản lý ảnh thi công"
+                        >
+                          <i class="bi bi-images"></i>
                         </a>
                       </td>
                     </tr>
@@ -348,6 +434,60 @@
           </div>
         </div>
       </section>
+      <div
+        class="modal fade"
+        id="importResultModal"
+        tabindex="-1"
+        th:if="${importErrors != null}"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-warning text-dark">
+              <h5 class="modal-title">
+                <i class="bi bi-exclamation-triangle-fill"></i> Kết quả Thêm Tự
+                Động
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p class="text-success fw-bold">
+                <i class="bi bi-check-circle-fill"></i> Đã thêm thành công:
+                <span th:text="${importSuccessCount}">0</span> dự án.
+              </p>
+              <hr />
+              <p class="text-danger fw-bold mb-2">
+                Các dự án lỗi không được thêm:
+              </p>
+              <ul
+                class="list-group list-group-flush"
+                style="max-height: 300px; overflow-y: auto"
+              >
+                <li
+                  class="list-group-item text-danger small"
+                  th:each="err : ${importErrors}"
+                >
+                  <i class="bi bi-x-circle me-2"></i>
+                  <span th:text="${err}">Lỗi dòng 1</span>
+                </li>
+              </ul>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Đóng
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <a
       href="#"
@@ -403,6 +543,53 @@
         alert("Dữ liệu hợp lệ! Đang thêm dự án...");
         return true; // Cho phép submit
       }
+    </script>
+    <script>
+      // Hàm chạy khi bấm nút "Sửa"
+      function editProject(button) {
+        // 1. Lấy dữ liệu từ nút bấm
+        var id = button.getAttribute("data-id");
+        var title = button.getAttribute("data-title");
+        var client = button.getAttribute("data-client");
+        var categoryId = button.getAttribute("data-category");
+        var status = button.getAttribute("data-status");
+        var image = button.getAttribute("data-image");
+        var desc = button.getAttribute("data-desc");
+
+        // 2. Điền dữ liệu lên Form
+        document.getElementById("projectId").value = id;
+        document.getElementById("projectTitle").value = title;
+        document.getElementById("projectClient").value = client;
+        document.getElementById("projectCategory").value = categoryId;
+        document.getElementById("projectStatus").value = status;
+        document.getElementById("projectImage").value = image;
+        document.getElementById("projectDesc").value = desc;
+
+        // 3. Đổi tiêu đề Form để người dùng biết đang sửa
+        document.getElementById("formTitle").innerText =
+          "Cập nhật Dự Án (ID: " + id + ")";
+        document.getElementById("formTitle").classList.add("text-warning");
+
+        // 4. Cuộn màn hình lên đầu trang (chỗ Form)
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // Hàm reset form về trạng thái thêm mới
+      function resetForm() {
+        document.getElementById("projectForm").reset(); // Xóa trắng các ô
+        document.getElementById("projectId").value = ""; // Xóa ID ẩn
+
+        // Đổi lại tiêu đề
+        document.getElementById("formTitle").innerText = "Thêm Dự Án Mới";
+        document.getElementById("formTitle").classList.remove("text-warning");
+      }
+      document.addEventListener("DOMContentLoaded", function () {
+        var modalElement = document.getElementById("importResultModal");
+        if (modalElement) {
+          var myModal = new bootstrap.Modal(modalElement);
+          myModal.show();
+        }
+      });
     </script>
   </body>
 </html>

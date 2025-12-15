@@ -3,23 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Dịch vụ - Xây Nhà Trọn Gói FULLBD</title>
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <title>Danh mục Dịch vụ - Xây Dựng FULLBD</title>
 
     <link th:href="@{/assets/img/favicon.png}" rel="icon" />
     <link
       th:href="@{/assets/img/apple-touch-icon.png}"
       rel="apple-touch-icon"
     />
-
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
-
     <link
       th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}"
       rel="stylesheet"
@@ -37,7 +33,6 @@
       th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}"
       rel="stylesheet"
     />
-
     <link th:href="@{/assets/css/main.css}" rel="stylesheet" />
   </head>
 
@@ -46,22 +41,22 @@
       <div
         class="container-fluid container-xl position-relative d-flex align-items-center"
       >
-        <a th:href="@{/}" class="logo d-flex align-items-center me-auto">
+        <a th:href="@{/index}" class="logo d-flex align-items-center me-auto">
           <h1 class="sitename">Xây Dựng FULLBD</h1>
         </a>
 
         <nav id="navmenu" class="navmenu">
           <ul>
-            <li><a th:href="@{/}">Trang chủ</a></li>
+            <li><a th:href="@{/index}">Trang chủ</a></li>
             <li><a th:href="@{/about}">Giới thiệu</a></li>
-            <li><a th:href="@{/services}" class="active">Dịch vụ</a></li>
+            <li><a th:href="@{/services}" class="active">Danh mục</a></li>
             <li><a th:href="@{/projects}">Dự án</a></li>
             <li><a th:href="@{/team}">Đội ngũ</a></li>
             <li class="dropdown">
               <a href="#"
                 ><span>Trang khác</span>
-                <i class="bi bi-chevron-down toggle-dropdown"></i
-              ></a>
+                <i class="bi bi-chevron-down toggle-dropdown"></i>
+              </a>
               <ul>
                 <li><a th:href="@{/service-details}">Chi tiết Dịch vụ</a></li>
                 <li><a th:href="@{/quote}">Báo giá</a></li>
@@ -70,14 +65,13 @@
                 </li>
               </ul>
             </li>
-
             <li><a th:href="@{/contact}">Liên hệ</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
         <a class="btn-getstarted d-none d-sm-block" th:href="@{/quote}"
-          >Yêu cầu Báo giá</a
+          >Yêu Cầu Báo Giá</a
         >
       </div>
     </header>
@@ -89,103 +83,74 @@
         th:style="'background-image: url(' + @{/assets/img/construction/showcase-2.webp} + ')'"
       >
         <div class="container position-relative">
-          <h1>Dịch vụ</h1>
+          <h1>Danh mục Dịch vụ</h1>
           <p>
-            Chúng tôi cung cấp các giải pháp xây dựng toàn diện, từ thiết kế,
-            thi công đến quản lý dự án, đảm bảo chất lượng vượt trội và sự hài
-            lòng tuyệt đối cho mọi công trình.
+            Chúng tôi cung cấp các giải pháp xây dựng toàn diện, chuyên nghiệp
+            và đa dạng.
           </p>
           <nav class="breadcrumbs">
             <ol>
               <li><a th:href="@{/}">Trang chủ</a></li>
-              <li class="current">Dịch vụ</li>
+              <li class="current">Danh mục</li>
             </ol>
           </nav>
         </div>
       </div>
+
       <section id="services" class="services section light-background">
         <div class="container" data-aos="fade-up" data-aos-delay="100">
           <div class="services-grid">
-            <div class="service-item" data-aos="fade-up" data-aos-delay="150">
-              <div class="service-number">01</div>
-              <div class="service-icon">
-                <i class="bi bi-buildings"></i>
-              </div>
-              <h3>Xây dựng thương mại</h3>
-              <p>
-                Giải pháp toàn diện cho tòa nhà thương mại từ khu phức hợp văn
-                phòng đến không gian bán lẻ, được cung cấp với độ chính xác và
-                chuyên môn cao.
-              </p>
-            </div>
-
-            <div class="service-item" data-aos="fade-up" data-aos-delay="200">
-              <div class="service-number">02</div>
-              <div class="service-icon">
-                <i class="bi bi-house-heart"></i>
-              </div>
-              <h3>Dự án nhà ở</h3>
-              <p>
-                Dịch vụ xây dựng và cải tạo nhà theo yêu cầu giúp biến tầm nhìn
-                của bạn thành hiện thực với sự chú ý đến từng chi tiết.
-              </p>
-            </div>
-
             <div
-              class="service-item featured"
+              class="service-item"
+              th:each="cat, iterStat : ${categories}"
+              th:classappend="${iterStat.index >= 6} ? 'hidden-item d-none' : ''"
               data-aos="fade-up"
-              data-aos-delay="250"
+              th:data-aos-delay="${(iterStat.index % 3) * 100 + 100}"
             >
-              <div class="featured-badge">Nổi bật</div>
-              <div class="service-number">03</div>
-              <div class="service-icon">
-                <i class="bi bi-gear-wide-connected"></i>
+              <div
+                class="service-number"
+                th:text="${iterStat.index + 1 < 10 ? '0' + (iterStat.index + 1) : iterStat.index + 1}"
+              >
+                01
               </div>
-              <h3>Thiết kế & Thi công</h3>
+
+              <div class="service-icon">
+                <i
+                  class="bi"
+                  th:classappend="${iterStat.index % 4 == 0} ? 'bi-buildings' : 
+                                  (${iterStat.index % 4 == 1} ? 'bi-house-heart' : 
+                                  (${iterStat.index % 4 == 2} ? 'bi-gear-wide-connected' : 'bi-tools'))"
+                >
+                </i>
+              </div>
+
+              <h3 th:text="${cat.name}">Tên Danh Mục</h3>
+
               <p>
-                Phương pháp tiếp cận tích hợp kết hợp thiết kế kiến ​​trúc và
-                chuyên môn xây dựng để triển khai dự án một cách liền mạch.
+                Cung cấp các giải pháp chuyên nghiệp, uy tín trong lĩnh vực
+                <span th:text="${cat.name}"></span>, đảm bảo chất lượng và tiến
+                độ.
               </p>
-              <a th:href="@{/quote}" class="service-cta">
-                <span>Nhận báo giá</span>
+
+              <a
+                th:href="@{/projects(categoryId=${cat.id})}"
+                class="service-cta"
+              >
+                <span>Xem danh sách dự án</span>
                 <i class="bi bi-arrow-right"></i>
               </a>
             </div>
+          </div>
 
-            <div class="service-item" data-aos="fade-up" data-aos-delay="300">
-              <div class="service-number">04</div>
-              <div class="service-icon">
-                <i class="bi bi-clipboard2-check"></i>
-              </div>
-              <h3>Tư vấn dự án</h3>
-              <p>
-                Hướng dẫn chuyên môn trong mọi giai đoạn xây dựng với kế hoạch
-                chiến lược và giám sát chuyên nghiệp.
-              </p>
-            </div>
-
-            <div class="service-item" data-aos="fade-up" data-aos-delay="350">
-              <div class="service-number">05</div>
-              <div class="service-icon">
-                <i class="bi bi-tools"></i>
-              </div>
-              <h3>Cải tạo &amp; Sửa chữa</h3>
-              <p>
-                Cải tạo không gian hiện có bằng những nâng cấp hiện đại trong
-                khi vẫn giữ được tính toàn vẹn về cấu trúc và tính thẩm mỹ.
-              </p>
-            </div>
-
-            <div class="service-item" data-aos="fade-up" data-aos-delay="400">
-              <div class="service-number">06</div>
-              <div class="service-icon">
-                <i class="bi bi-arrows-fullscreen"></i>
-              </div>
-              <h3>Chuẩn bị mặt bằng</h3>
-              <p>
-                Chuẩn bị mặt bằng hoàn chỉnh bao gồm đào đất, san lấp và lắp đặt
-                tiện ích để có nền móng dự án tối ưu.
-              </p>
+          <div class="row mt-5" th:if="${categories.size() > 6}">
+            <div class="col-12 text-center">
+              <button
+                id="btnToggleServices"
+                class="btn btn-outline-primary btn-lg"
+                onclick="toggleServices()"
+              >
+                Xem tất cả danh mục <i class="bi bi-chevron-down"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -202,8 +167,10 @@
                     class="img-fluid"
                   />
                 </div>
+
                 <div class="service-content">
                   <h3>Tổng thầu</h3>
+
                   <p>
                     Quản lý thi công toàn diện từ khâu lập kế hoạch đến hoàn
                     thiện. Chúng tôi điều phối mọi khía cạnh của dự án, đảm bảo
@@ -213,6 +180,7 @@
                 </div>
               </div>
             </div>
+
             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
               <div class="service-item">
                 <div class="service-visual">
@@ -222,8 +190,10 @@
                     class="img-fluid"
                   />
                 </div>
+
                 <div class="service-content">
                   <h3>Cải tạo nhà ở</h3>
+
                   <p>
                     Biến đổi ngôi nhà của bạn với dịch vụ cải tạo chuyên nghiệp
                     của chúng tôi. Từ cải tạo nhà bếp đến tân trang toàn diện
@@ -233,6 +203,7 @@
                 </div>
               </div>
             </div>
+
             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
               <div class="service-item">
                 <div class="service-visual">
@@ -242,8 +213,10 @@
                     class="img-fluid"
                   />
                 </div>
+
                 <div class="service-content">
                   <h3>Xây dựng thương mại</h3>
+
                   <p>
                     Xây dựng thành công doanh nghiệp của bạn với chuyên môn xây
                     dựng thương mại của chúng tôi. Chúng tôi chuyên về các tòa
@@ -253,6 +226,7 @@
                 </div>
               </div>
             </div>
+
             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="350">
               <div class="service-item">
                 <div class="service-visual">
@@ -262,8 +236,10 @@
                     class="img-fluid"
                   />
                 </div>
+
                 <div class="service-content">
                   <h3>Quản lý dự án</h3>
+
                   <p>
                     Giám sát chuyên nghiệp đảm bảo dự án của bạn đúng tiến độ và
                     trong phạm vi ngân sách. Các quản lý dự án giàu kinh nghiệm
@@ -279,12 +255,15 @@
             <div class="col-lg-12 text-center">
               <div class="cta-section">
                 <h4>Bạn đã sẵn sàng bắt đầu dự án tiếp theo chưa?</h4>
+
                 <p>
                   Hãy liên hệ với nhóm của chúng tôi để thảo luận về nhu cầu xây
                   dựng của bạn và nhận báo giá phù hợp cho dự án của bạn.
                 </p>
+
                 <a th:href="@{/quote}" class="btn-primary">
                   <span>Nhận báo giá miễn phí</span>
+
                   <i class="bi bi-arrow-right"></i>
                 </a>
               </div>
@@ -317,12 +296,6 @@
                 <a href="#" aria-label="LinkedIn"
                   ><i class="bi bi-linkedin"></i
                 ></a>
-                <a href="#" aria-label="Twitter"
-                  ><i class="bi bi-twitter-x"></i
-                ></a>
-                <a href="#" aria-label="Dribbble"
-                  ><i class="bi bi-dribbble"></i
-                ></a>
               </div>
             </div>
           </div>
@@ -353,8 +326,8 @@
                   <ul class="list-unstyled">
                     <li><a href="#">Trung tâm Trợ giúp</a></li>
                     <li><a href="#">Liên hệ</a></li>
-                    <li><a href="#">Chính sách Riêng tư</a></li>
-                    <li><a href="#">Điều khoản Dịch vụ</a></li>
+                    <li><a href="#">Chính sách</a></li>
+                    <li><a href="#">Điều khoản</a></li>
                   </ul>
                 </div>
               </div>
@@ -378,10 +351,6 @@
                 <p class="mb-0">
                   © <span class="sitename">Myebsite</span>. Bảo lưu mọi quyền.
                 </p>
-                <div class="credits">
-                  Thiết kế bởi
-                  <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                </div>
               </div>
             </div>
           </div>
@@ -395,7 +364,6 @@
       class="scroll-top d-flex align-items-center justify-content-center"
       ><i class="bi bi-arrow-up-short"></i
     ></a>
-
     <div id="preloader"></div>
 
     <script
@@ -408,7 +376,51 @@
     ></script>
     <script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
     <script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
-
     <script th:src="@{/assets/js/main.js}"></script>
+
+    <script>
+      function toggleServices() {
+        const hiddenItems = document.querySelectorAll(".hidden-item");
+        const btn = document.getElementById("btnToggleServices");
+
+        // Kiểm tra trạng thái hiện tại (đang ẩn hay hiện) dựa trên class 'd-none'
+        const isHidden = hiddenItems[0].classList.contains("d-none");
+
+        if (isHidden) {
+          // Hiện ra
+          hiddenItems.forEach((item) => {
+            item.classList.remove("d-none");
+            // Thêm hiệu ứng fade-in nhẹ
+            item.classList.add("fade-in-up");
+          });
+          btn.innerHTML = 'Ẩn bớt <i class="bi bi-chevron-up"></i>';
+        } else {
+          // Ẩn đi
+          hiddenItems.forEach((item) => item.classList.add("d-none"));
+          btn.innerHTML =
+            'Xem tất cả danh mục <i class="bi bi-chevron-down"></i>';
+
+          document
+            .getElementById("services")
+            .scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    </script>
+
+    <style>
+      .fade-in-up {
+        animation: fadeInUp 0.5s ease-out;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
   </body>
 </html>

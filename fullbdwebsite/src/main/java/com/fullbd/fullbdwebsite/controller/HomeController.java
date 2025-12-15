@@ -2,7 +2,11 @@ package com.fullbd.fullbdwebsite.controller;
 
 import com.fullbd.fullbdwebsite.model.Category;
 import com.fullbd.fullbdwebsite.model.Project;
+import com.fullbd.fullbdwebsite.model.ProjectImage;
 import com.fullbd.fullbdwebsite.model.QuoteRequest;
+import com.fullbd.fullbdwebsite.repository.CategoryRepository;
+import com.fullbd.fullbdwebsite.repository.ProjectImageRepository;
+import com.fullbd.fullbdwebsite.repository.ProjectRepository;
 import com.fullbd.fullbdwebsite.repository.QuoteRequestRepository;
 import com.fullbd.fullbdwebsite.service.ProjectService;
 import com.fullbd.fullbdwebsite.service.CategoryService;
@@ -30,12 +34,21 @@ public class HomeController {
     @Autowired
     private QuoteRequestRepository quoteRequestRepository; // Thêm Repository để lưu báo giá
 
+    @Autowired
+    private ProjectRepository projectRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ProjectImageRepository projectImageRepository;
+
     // 1. Trang chủ
-    @GetMapping(value = {"/", "/index"})
+    @GetMapping(value = { "/", "/index" })
     public String home(Model model) {
         List<Project> projects = projectService.getAllProjects();
         // Cắt lấy 6 dự án đầu tiên để hiển thị trang chủ
-        if(projects.size() > 6) {
+        if (projects.size() > 6) {
             projects = projects.subList(0, 6);
         }
         model.addAttribute("projects", projects);
@@ -44,101 +57,136 @@ public class HomeController {
 
     // 2. Các trang tĩnh
     @GetMapping("/404")
-    public String p404(){
+    public String p404() {
         return "404";
     }
 
     @GetMapping("/about")
-    public String about(){
+    public String about() {
         return "about";
     }
 
     @GetMapping("/contact")
-    public String contact(){
+    public String contact() {
         return "contact";
     }
 
     @GetMapping("/privacy")
-    public String privacy(){
+    public String privacy() {
         return "privacy";
     }
 
     @GetMapping("/service-details")
-    public String servicedetails(){
+    public String servicedetails() {
         return "service-details";
     }
 
     @GetMapping("/services")
-    public String services(){
+    public String services(Model model) {
+        List<Category> categories = categoryService.getAllCategories();
+        model.addAttribute("categories", categories);
         return "services";
     }
 
     @GetMapping("/starter-page")
-    public String starterpage(){
+    public String starterpage() {
         return "starter-page";
     }
 
     @GetMapping("/team")
-    public String team(){
+    public String team() {
         return "team";
     }
 
     @GetMapping("/terms")
-    public String terms(){
+    public String terms() {
         return "terms";
     }
 
     // 3. Quản lý hiển thị Dự án (Public)
     @GetMapping("/projects")
-    public String projects(Model model) {
-        List<Project> projects = projectService.getAllProjects();
+    public String projects(@RequestParam(value = "categoryId", required = false) Long categoryId, Model model) {
+        List<Project> projects;
+
+        if (categoryId != null) {
+            // Nếu có ID danh mục -> Lọc theo danh mục
+            projects = projectRepository.findByCategoryId(categoryId);
+
+            // (Tùy chọn) Lấy tên danh mục để hiển thị tiêu đề "Dự án thuộc danh mục X"
+            Category cat = categoryRepository.findById(categoryId).orElse(null);
+            if (cat != null) {
+                model.addAttribute("categoryName", cat.getName());
+            }
+        } else {
+            // Nếu không có -> Lấy tất cả
+            projects = projectService.getAllProjects();
+        }
+
         model.addAttribute("projects", projects);
         return "projects";
     }
 
+    // @GetMapping("/project-details")
+    // public String projectDetails(@RequestParam("id") Long id, Model model) {
+    // Optional<Project> project = projectService.getProjectById(id);
+
+    // if (project.isPresent()) {
+    // model.addAttribute("project", project.get());
+    // return "project-details";
+    // } else {
+    // return "redirect:/projects";
+    // }
+    // }
     @GetMapping("/project-details")
-    public String projectDetails(@RequestParam("id") Long id, Model model) {
-        Optional<Project> project = projectService.getProjectById(id);
-        
-        if (project.isPresent()) {
-            model.addAttribute("project", project.get());
-            return "project-details";
-        } else {
-            return "redirect:/projects";
-        }
+    public String projectDetails(@RequestParam(name = "id") Long id, Model model) {
+
+        // 1. Lấy thông tin dự án (Code cũ)
+        Project project = projectRepository.findById(id).orElseThrow();
+
+        // 2. LẤY DANH SÁCH ẢNH LIÊN QUAN (Mới thêm)
+        List<ProjectImage> images = projectImageRepository.findByProjectId(id);
+
+        model.addAttribute("project", project);
+
+        // 3. Gửi danh sách ảnh sang View
+        model.addAttribute("images", images);
+
+        return "project-details";
     }
 
     // 4. Xử lý Báo giá (Gộp từ QuoteController sang)
-    
+
     @GetMapping("/quote")
-    public String quote(Model model){
+    public String quote(Model model) {
         // 1. Lấy danh sách từ DB
         List<Category> categories = categoryService.getAllCategories();
-        
+
         // DEBUG: In ra console để kiểm tra xem có lấy được dữ liệu không
         System.out.println("Số lượng danh mục lấy được: " + categories.size());
 
         // 2. Gửi sang View
-        model.addAttribute("categories", categories); 
+        model.addAttribute("categories", categories);
         model.addAttribute("quoteRequest", new QuoteRequest());
-        
+
         return "quote";
     }
 
     // Xử lý submit form báo giá
     @PostMapping("/quote/submit")
-    public String submitQuote(@ModelAttribute("quoteRequest") QuoteRequest quoteRequest, RedirectAttributes redirectAttributes) {
+    public String submitQuote(@ModelAttribute("quoteRequest") QuoteRequest quoteRequest,
+            RedirectAttributes redirectAttributes) {
         try {
             // Lưu vào Database
             quoteRequestRepository.save(quoteRequest);
-            
+
             // Thông báo thành công
-            redirectAttributes.addFlashAttribute("message", "Yêu cầu báo giá của bạn đã được gửi thành công! Chúng tôi sẽ liên hệ sớm nhất.");
+            redirectAttributes.addFlashAttribute("message",
+                    "Yêu cầu báo giá của bạn đã được gửi thành công! Chúng tôi sẽ liên hệ sớm nhất.");
         } catch (Exception e) {
             // Thông báo lỗi
             redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra, vui lòng thử lại sau!");
         }
-        
+
         return "redirect:/quote"; // Quay lại trang báo giá
     }
 }
