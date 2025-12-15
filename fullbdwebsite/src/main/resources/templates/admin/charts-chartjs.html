@@ -330,26 +330,34 @@
         });
 
         // 3. BIỂU ĐỒ BÁO GIÁ (LINE CHART - Dữ liệu demo để bạn hình dung)
+        // Lấy dữ liệu từ Controller
+        const quoteLabels = /*[[${quoteLabels}]]*/ ["Tháng 1", "Tháng 2"];
+        const quoteData = /*[[${quoteData}]]*/ [0, 0];
+
         new Chart(document.querySelector("#quoteRequestChart"), {
           type: "line",
           data: {
-            labels: [
-              "Tháng 1",
-              "Tháng 2",
-              "Tháng 3",
-              "Tháng 4",
-              "Tháng 5",
-              "Tháng 6",
-            ],
+            labels: quoteLabels, // Sử dụng biến thực tế
             datasets: [
               {
                 label: "Số yêu cầu gửi về",
-                data: [12, 19, 3, 5, 2, 30], // Bạn cần code thêm trong Controller để lấy số thật
-                fill: false,
+                data: quoteData, // Sử dụng biến thực tế
+                fill: true, // Tô màu vùng dưới đường kẻ cho đẹp
+                backgroundColor: "rgba(75, 192, 192, 0.2)",
                 borderColor: "rgb(75, 192, 192)",
-                tension: 0.1,
+                tension: 0.3, // Làm mượt đường cong
               },
             ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  stepSize: 1, // Chỉ hiển thị số nguyên (không có 1.5 yêu cầu)
+                },
+              },
+            },
           },
         });
       });
